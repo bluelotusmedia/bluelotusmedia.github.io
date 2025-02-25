@@ -2,17 +2,17 @@
 import Image from "next/image";
 import heroImage from "./images/hero-background2.jpg";
 import logo from "./images/logo.svg";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faLightbulb,
 	faCode,
 	faBriefcase,
 	faEnvelope,
-	faPalette, // Import faPalette
-	faPeopleGroup, // Import faPeopleGroup
-	faGem, // Import faGem
-	faFire, // Import faFire
+	faPalette,
+	faPeopleGroup,
+	faGem,
+	faFire,
 } from "@fortawesome/free-solid-svg-icons";
 import {
 	faFacebook,
@@ -91,7 +91,7 @@ export default function Home() {
 
 	const scrollToSection = (ref) => {
 		if (ref && ref.current) {
-			ref.current.scrollIntoView({ behavior: "smooth" }); // Use scrollIntoView
+			ref.current.scrollIntoView({ behavior: "smooth" });
 		}
 	};
 
@@ -117,7 +117,7 @@ export default function Home() {
 
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
-	}); // Add empty dependency array
+	}, []); // Add empty dependency array here
 
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
@@ -145,11 +145,11 @@ export default function Home() {
 				<div className="mx-auto px-4 py-2 flex items-center justify-between">
 					<Image
 						src={logo}
-						alt="Logo"
-						width="300"
-						height="50"
-						onClick={scrollToTop} // Add onClick handler
-						style={{ cursor: "pointer" }} // Make cursor a pointer
+						alt="Blue Lotus Media Logo"
+						width={300}
+						height={50}
+						onClick={scrollToTop}
+						style={{ cursor: "pointer" }}
 					/>
 					<button
 						className="md:hidden text-blue-700"
@@ -249,7 +249,7 @@ export default function Home() {
 				{
 					ref: portfolioRef,
 					title: "Portfolio",
-					content: <PortfolioContent openModal={openModal} />, // Pass openModal to PortfolioContent
+					content: <PortfolioContent openModal={openModal} />,
 					icon: faBriefcase,
 				},
 				{
@@ -290,18 +290,17 @@ export default function Home() {
 			{selectedImage && (
 				<div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
 					<div className="modal-container relative">
-						{" "}
-						{/* Add relative here */}
 						<Image
 							src={selectedImage}
 							alt="Gallery Image"
 							width={800}
 							height={600}
-							style={{ objectFit: "contain" }} // Add objectFit
+							style={{ objectFit: "contain" }}
 						/>
 						<button
 							onClick={closeModal}
-							className="absolute top-4 right-4 text-white text-xl z-10" // Add z-index
+							className="absolute top-4 right-4 text-white text-xl z-10"
+							aria-label="Close Modal"
 						>
 							Close
 						</button>
@@ -361,18 +360,17 @@ const AboutContent = () => {
 		},
 	];
 
-	const [isVisible, setIsVisible] = useState([false, false, false, false]); // State for visibility
+	const [isVisible, setIsVisible] = useState([false, false, false, false]);
 
 	useEffect(() => {
 		const handleScroll = () => {
-			const triggers = document.querySelectorAll(".value-item"); // Select all value items
+			const triggers = document.querySelectorAll(".value-item");
 
 			triggers.forEach((trigger, index) => {
 				const top = trigger.getBoundingClientRect().top;
 				const screenHeight = window.innerHeight;
 
 				if (top < screenHeight * 0.8) {
-					// Adjust 0.8 for when animation triggers
 					setIsVisible((prevState) => {
 						const newState = [...prevState];
 						newState[index] = true;
@@ -384,16 +382,12 @@ const AboutContent = () => {
 
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
-	}, []);
+	}, []); // Add empty dependency array here
 
 	return (
 		<div>
 			<div className="flex items-start">
-				{" "}
-				{/* Flex container for image and text */}
 				<div className="mr-8 shrink-0">
-					{" "}
-					{/* Image container */}
 					<Image
 						src={jakelouis}
 						alt={"Jake Louis"}
@@ -404,8 +398,6 @@ const AboutContent = () => {
 					/>
 				</div>
 				<div>
-					{" "}
-					{/* Text content container */}
 					<p className="text-lg md:text-xl leading-relaxed">
 						Blue Lotus Media is a Denver-based creative agency specializing in
 						web development, graphic design, music production, and video
@@ -433,12 +425,8 @@ const AboutContent = () => {
 						connections and leave a lasting impression.
 					</p>
 				</div>
-			</div>{" "}
-			{/* Close the flex container for image and text */}
-			{/* Grid container for the values - *OUTSIDE* the flex container */}
+			</div>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-5 justify-center">
-				{" "}
-				{/* Centering grid */}
 				{values.map((value, index) => (
 					<div
 						key={index}
@@ -544,7 +532,7 @@ const ServicesContent = () => {
 
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
-	});
+	}, []); // Correctly add empty dependency array
 
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -556,8 +544,6 @@ const ServicesContent = () => {
 					} transition-opacity duration-500 opacity-0`}
 				>
 					<div className="flex flex-col items-center p-6 bg-white rounded-lg shadow services">
-						{" "}
-						{/* Card-like styling */}
 						<FontAwesomeIcon
 							icon={service.icon}
 							className="text-4xl text-blue-500 mb-4"
@@ -584,6 +570,7 @@ const ServicesContent = () => {
 
 const PortfolioContent = ({ openModal }) => {
 	const images = [
+		// Moved outside the component
 		{ src: galleryImage1, alt: "Image 1" },
 		{ src: galleryImage2, alt: "Image 2" },
 		{ src: galleryImage3, alt: "Image 3" },
@@ -639,13 +626,14 @@ const PortfolioContent = ({ openModal }) => {
 	const [imageVisibility, setImageVisibility] = useState(
 		images.map(() => false)
 	);
-	const imageRefs = useRef(images.map(() => useRef(null)));
+	const imageRefs = useRef(images.map(() => null)); // Create refs outside the loop
 
 	useEffect(() => {
 		const handleScroll = () => {
 			imageRefs.current.forEach((ref, index) => {
-				if (ref.current) {
-					const top = ref.current.getBoundingClientRect().top;
+				if (ref) {
+					// Check if ref exists
+					const top = ref.getBoundingClientRect().top;
 					const screenHeight = window.innerHeight;
 					if (top < screenHeight * 0.8) {
 						setImageVisibility((prev) => {
@@ -660,7 +648,7 @@ const PortfolioContent = ({ openModal }) => {
 
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
-	});
+	}, []); // Correctly add empty dependency array
 
 	return (
 		<div className="masonry-grid">
@@ -670,7 +658,7 @@ const PortfolioContent = ({ openModal }) => {
 					className={`masonry-grid-item ${
 						imageVisibility[index] ? "animate-fadeIn" : ""
 					} transition-opacity duration-500 opacity-0`}
-					ref={imageRefs.current[index]}
+					ref={(el) => (imageRefs.current[index] = el)} // Assign ref correctly
 				>
 					<Image
 						src={image.src}
@@ -685,10 +673,7 @@ const PortfolioContent = ({ openModal }) => {
 			<style jsx>{`
 				.masonry-grid {
 					display: grid;
-					grid-template-columns: repeat(
-						auto-fill,
-						minmax(250px, 1fr)
-					); /* Adjust minmax as needed */
+					grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 					grid-gap: 1rem;
 				}
 				.animate-fadeIn {
@@ -720,7 +705,6 @@ const ContactContent = () => (
 			</li>
 		</ul>
 
-		{/* Social Media Icons */}
 		<div className="flex justify-center space-x-6">
 			<a
 				href="https://facebook.com/bluelotusmedia"
@@ -755,12 +739,11 @@ const ContactContent = () => (
 		</div>
 		<style jsx>{`
 			.contact {
-				/* Target the last section, which is Contact */
-				height: 62vh; /* Make it occupy full viewport height */
+				height: 62vh;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				justify-content: center; /* Center content vertically */
+				justify-content: center;
 			}
 		`}</style>
 	</div>
