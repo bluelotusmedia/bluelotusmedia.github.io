@@ -13,6 +13,7 @@ import {
 	faPeopleGroup,
 	faGem,
 	faFire,
+	faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import {
 	faFacebook,
@@ -307,21 +308,31 @@ export default function Home() {
 
 			{/* Modal */}
 			{selectedImage && (
-				<div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
-					<div className="modal-container relative">
+				<div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4">
+					<div className="relative max-w-full max-h-full">
 						<Image
 							src={selectedImage}
 							alt="Gallery Image"
-							width={800}
-							height={600}
-							style={{ objectFit: "contain" }}
+							width={800} // These can be removed or adjusted
+							height={600} // These can be removed or adjusted
+							style={{
+								objectFit: "contain",
+								width: "100%", // Add this
+								height: "100%", // Add this
+								maxWidth: "90vw", // Add this
+								maxHeight: "90vh", // Add this
+							}}
 						/>
 						<button
 							onClick={closeModal}
-							className="absolute top-4 right-4 text-white text-xl z-10"
+							className="absolute top-4 right-4  text-xl z-10"
 							aria-label="Close Modal"
 						>
-							Close
+							{/* Close Icon */}
+							<FontAwesomeIcon
+								icon={faXmark}
+								className="text-white text-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+							/>
 						</button>
 					</div>
 				</div>
