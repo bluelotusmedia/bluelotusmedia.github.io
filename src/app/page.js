@@ -136,6 +136,25 @@ export default function Home() {
 		setSelectedImage(null);
 	};
 
+	// Add this useEffect hook
+	useEffect(() => {
+		const handleKeyDown = (event) => {
+			if (selectedImage && event.key === "Escape") {
+				closeModal();
+			}
+		};
+
+		// Add event listener when the modal is open
+		if (selectedImage) {
+			window.addEventListener("keydown", handleKeyDown);
+		}
+
+		// Clean up the event listener when the modal is closed or the component unmounts
+		return () => {
+			window.removeEventListener("keydown", handleKeyDown);
+		};
+	}, [selectedImage]); // Dependency on selectedImage ensures this effect runs when it changes
+
 	return (
 		<div style={{ background: "#3B82F6" }}>
 			<nav
