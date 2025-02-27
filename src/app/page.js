@@ -82,6 +82,8 @@ export default function Home() {
 	const navRef = useRef(null);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [selectedImage, setSelectedImage] = useState(null);
+	const [mobileNavBackground, setMobileNavBackground] = useState("bg-blue-700"); // Initial dark blue for mobile
+	const [isScrolled, setIsScrolled] = useState(false); // Track scroll state
 
 	const scrollToTop = () => {
 		window.scrollTo({
@@ -98,27 +100,25 @@ export default function Home() {
 
 	useEffect(() => {
 		const handleScroll = () => {
-			if (navRef.current) {
-				const nav = navRef.current;
-				if (window.scrollY > 100) {
-					nav.classList.add("bg-opacity-80");
-					nav.querySelectorAll("a").forEach((link) => {
-						link.classList.add("text-blue-700");
-						link.classList.remove("text-white");
-					});
-				} else {
-					nav.classList.remove("bg-opacity-80");
-					nav.querySelectorAll("a").forEach((link) => {
-						link.classList.remove("text-blue-700");
-						link.classList.add("text-white");
-					});
+			if (window.scrollY > 100) {
+				setIsScrolled(true);
+				// Change to light blue *only on mobile* when scrolling down
+				if (window.innerWidth < 768) {
+					// Check for mobile (md breakpoint)
+					setMobileNavBackground("bg-blue-200");
+				}
+			} else {
+				setIsScrolled(false);
+				// Change back to dark blue *only on mobile* at the top
+				if (window.innerWidth < 768) {
+					setMobileNavBackground("bg-blue-700");
 				}
 			}
 		};
 
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
-	}, []); // Add empty dependency array here
+	}, []);
 
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
@@ -136,8 +136,6 @@ export default function Home() {
 	const closeModal = () => {
 		setSelectedImage(null);
 	};
-
-	// Add this useEffect hook
 	useEffect(() => {
 		const handleKeyDown = (event) => {
 			if (selectedImage && event.key === "Escape") {
@@ -145,22 +143,24 @@ export default function Home() {
 			}
 		};
 
-		// Add event listener when the modal is open
 		if (selectedImage) {
 			window.addEventListener("keydown", handleKeyDown);
 		}
 
-		// Clean up the event listener when the modal is closed or the component unmounts
 		return () => {
 			window.removeEventListener("keydown", handleKeyDown);
 		};
-	}, [selectedImage]); // Dependency on selectedImage ensures this effect runs when it changes
+	}, [selectedImage]);
 
 	return (
 		<div style={{ background: "#3B82F6" }}>
 			<nav
 				ref={navRef}
-				className="fixed top-0 w-full z-50 backdrop-blur-md bg-gray-100 bg-opacity-0 transition-all duration-500"
+				className={`fixed top-0 w-full z-50 backdrop-blur-md transition-all duration-500 ${
+					isScrolled && window.innerWidth >= 768
+						? "bg-opacity-80 bg-gray-100"
+						: ""
+				}`}
 			>
 				<div className="mx-auto px-4 py-2 flex items-center justify-between">
 					<Image
@@ -172,7 +172,9 @@ export default function Home() {
 						style={{ cursor: "pointer" }}
 					/>
 					<button
-						className="md:hidden text-blue-700"
+						className={`md:hidden ${
+							isScrolled ? "text-blue-700" : "text-white"
+						}`} // Conditional text color
 						onClick={toggleMenu}
 						aria-label="Toggle Menu"
 					>
@@ -203,7 +205,9 @@ export default function Home() {
 					<ul
 						className={`${
 							isMenuOpen ? "block" : "hidden"
-						} md:flex md:space-x-4 absolute md:static top-full left-0 w-full md:w-auto bg-white md:bg-transparent py-4 md:py-0 transition-all duration-300`}
+						} md:flex md:space-x-4 absolute md:static top-full left-0 w-full md:w-auto  md:bg-transparent py-4 md:py-0 transition-all duration-300 ${
+							isMenuOpen ? mobileNavBackground : ""
+						}`}
 					>
 						{["About", "Services", "Portfolio", "Contact"].map((section) => (
 							<li key={section}>
@@ -221,7 +225,15 @@ export default function Home() {
 										);
 										toggleMenu();
 									}}
-									className="text-white hover:text-blue-500 block px-4 py-2 md:p-0 transition-colors duration-300"
+									className={`block px-4 py-2 md:p-0 transition-colors duration-300 ${
+										isMenuOpen
+											? isScrolled
+												? "text-blue-700"
+												: "text-white"
+											: isScrolled
+											? "text-blue-700"
+											: "text-white"
+									} hover:text-blue-500`}
 								>
 									{section}
 								</a>
@@ -230,7 +242,7 @@ export default function Home() {
 					</ul>
 				</div>
 			</nav>
-
+			{/* Rest of the component (hero, about, services, etc.) is the same */}
 			<div className="relative w-screen h-screen">
 				<Image
 					src={heroImage}
@@ -283,7 +295,9 @@ export default function Home() {
 					key={sectionData.title}
 					ref={sectionData.ref}
 					className={`min-h-screen py-16 px-8 md:px-24 transition-colors duration-500`}
-					style={{ backgroundColor: lotusColors[index % lotusColors.length] }}
+					style={{
+						backgroundColor: lotusColors[index % lotusColors.length],
+					}}
 				>
 					<div className="container mx-auto">
 						<div className="flex items-center pb-4 pt-4 pl-4">
@@ -313,14 +327,14 @@ export default function Home() {
 						<Image
 							src={selectedImage}
 							alt="Gallery Image"
-							width={800} // These can be removed or adjusted
-							height={600} // These can be removed or adjusted
+							width={800}
+							height={600}
 							style={{
 								objectFit: "contain",
-								width: "100%", // Add this
-								height: "100%", // Add this
-								maxWidth: "90vw", // Add this
-								maxHeight: "90vh", // Add this
+								width: "100%",
+								height: "100%",
+								maxWidth: "90vw",
+								maxHeight: "90vh",
 							}}
 						/>
 						<button
@@ -328,7 +342,6 @@ export default function Home() {
 							className="absolute top-4 right-4  text-xl z-10"
 							aria-label="Close Modal"
 						>
-							{/* Close Icon */}
 							<FontAwesomeIcon
 								icon={faXmark}
 								className="text-white text-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
@@ -361,7 +374,6 @@ export default function Home() {
 		</div>
 	);
 }
-
 const AboutContent = () => {
 	const values = [
 		{
@@ -412,22 +424,23 @@ const AboutContent = () => {
 
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
-	}, []); // Add empty dependency array here
+	}, []);
 
 	return (
 		<div>
-			<div className="flex items-start">
-				<div className="mr-8 shrink-0">
+			{/* Responsive container for image and text */}
+			<div className="flex flex-col md:flex-row items-start">
+				<div className="md:mr-8 md:shrink-0 w-full md:w-auto mb-4 md:mb-0 md:max-w-[27%]">
 					<Image
 						src={jakelouis}
 						alt={"Jake Louis"}
 						width={300}
 						height={350}
 						style={{ cursor: "pointer" }}
-						className="rounded-lg"
+						className="rounded-lg w-full"
 					/>
 				</div>
-				<div>
+				<div className="md:flex-1">
 					<p className="text-lg md:text-xl leading-relaxed">
 						Blue Lotus Media is a Denver-based creative agency specializing in
 						web development, graphic design, music production, and video
