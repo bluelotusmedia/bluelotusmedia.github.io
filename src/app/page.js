@@ -22,7 +22,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 // Import your images
-import jakelouis from "./images/jake-louis.jpg";
+import jakelouis from "./images/jake-louis.png";
 import galleryImage1 from "./images/gallery1.jpg";
 import galleryImage2 from "./images/gallery2.jpg";
 import galleryImage3 from "./images/gallery3.jpg";
