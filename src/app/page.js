@@ -82,7 +82,6 @@ export default function Home() {
 	const navRef = useRef(null);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [selectedImage, setSelectedImage] = useState(null);
-	const [mobileNavBackground, setMobileNavBackground] = useState("bg-blue-700"); // Initial dark blue for mobile
 	const [isScrolled, setIsScrolled] = useState(false); // Track scroll state
 
 	const scrollToTop = () => {
@@ -102,17 +101,8 @@ export default function Home() {
 		const handleScroll = () => {
 			if (window.scrollY > 100) {
 				setIsScrolled(true);
-				// Change to light blue *only on mobile* when scrolling down
-				if (window.innerWidth < 768) {
-					// Check for mobile (md breakpoint)
-					setMobileNavBackground("bg-blue-200");
-				}
 			} else {
 				setIsScrolled(false);
-				// Change back to dark blue *only on mobile* at the top
-				if (window.innerWidth < 768) {
-					setMobileNavBackground("bg-blue-700");
-				}
 			}
 		};
 
@@ -124,10 +114,7 @@ export default function Home() {
 		setIsMenuOpen(!isMenuOpen);
 	};
 
-	const lotusColors = ["#f8f0e3", "#e8f0fe", "#dbe7fd", "#cce2fd", "#bfdefc"];
-
-	const modernFont =
-		"ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'";
+	const lotusColors = ["#F0F8FF", "#F5FFFA", "#F0FFFF", "#F8F8FF", "#FFF5EE"];
 
 	const openModal = (image) => {
 		setSelectedImage(image);
@@ -153,13 +140,11 @@ export default function Home() {
 	}, [selectedImage]);
 
 	return (
-		<div style={{ background: "#3B82F6" }}>
+		<div style={{ background: "#F0F8FF" }} className="min-h-screen">
 			<nav
 				ref={navRef}
-				className={`fixed top-0 w-full z-50 backdrop-blur-md transition-all duration-500 ${
-					isScrolled && window.innerWidth >= 768
-						? "bg-opacity-80 bg-gray-100"
-						: ""
+				className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+					isScrolled ? "bg-white shadow-md" : "bg-gray-900 md:bg-transparent"
 				}`}
 			>
 				<div className="mx-auto px-4 py-2 flex items-center justify-between">
@@ -170,17 +155,15 @@ export default function Home() {
 						height={50}
 						onClick={scrollToTop}
 						style={{ cursor: "pointer" }}
+						className={`${isScrolled ? "logo-dark" : ""}`}
 					/>
-					<button
-						className={`md:hidden ${
-							isScrolled ? "text-blue-700" : "text-white"
-						}`} // Conditional text color
-						onClick={toggleMenu}
-						aria-label="Toggle Menu"
-					>
-						<svg
+																				<button
+																					className={`md:hidden ${isScrolled ? "text-[#333333]" : "text-white"}`} // Conditional text color for hamburger icon
+																					onClick={toggleMenu}
+																					aria-label="Toggle Menu"
+																				>						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							className="h-6 w-6"
+							className="h-6 w-6 transition-all duration-300"
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"
@@ -202,15 +185,22 @@ export default function Home() {
 							)}
 						</svg>
 					</button>
-					<ul
-						className={`${
-							isMenuOpen ? "block" : "hidden"
-						} md:flex md:space-x-4 absolute md:static top-full left-0 w-full md:w-auto  md:bg-transparent py-4 md:py-0 transition-all duration-300 ${
-							isMenuOpen ? mobileNavBackground : ""
-						}`}
-					>
+					                    <ul
+											className={`${
+												isMenuOpen ? "max-h-screen fixed inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center py-4 overflow-hidden transition-all duration-300" : "max-h-0 md:max-h-full overflow-hidden"
+											} md:flex md:space-x-4 md:py-0`}
+										>						{" "}
+						{isMenuOpen && (
+							<button
+								onClick={toggleMenu}
+								className="absolute top-4 right-4 text-white text-3xl"
+								aria-label="Close Menu"
+							>
+								<FontAwesomeIcon icon={faXmark} />
+							</button>
+						)}
 						{["About", "Services", "Portfolio", "Contact"].map((section) => (
-							<li key={section}>
+							<li key={section} className="w-full md:py-0 md:px-0">
 								<a
 									href={`#${section.toLowerCase()}`}
 									onClick={() => {
@@ -223,20 +213,20 @@ export default function Home() {
 												? portfolioRef
 												: contactRef
 										);
-										toggleMenu();
+										if (window.innerWidth < 768) {
+											// Only toggle menu on mobile
+											toggleMenu();
+										}
 									}}
-									className={`block px-4 py-2 md:p-0 transition-colors duration-300 ${
-										isMenuOpen
-											? isScrolled
-												? "text-blue-700"
-												: "text-white"
-											: isScrolled
-											? "text-blue-700"
-											: "text-white"
-									} hover:text-blue-500`}
-								>
-									{section}
-								</a>
+																								className={`block w-full text-center py-3 transition-colors duration-300 ${
+																									isMenuOpen
+																										? "text-white hover:bg-gray-700" // Mobile: White text on dark overlay, dark gray on hover
+																										: isScrolled
+																										? "text-[#333333] hover:text-[#CC6600]" // Desktop: Dark gray when scrolled, orange on hover
+																										: "text-white hover:text-gray-300" // Desktop: White when not scrolled on desktop, light gray on hover
+																								}`}
+																							>									{section}
+								</a>{" "}
 							</li>
 						))}
 					</ul>
@@ -251,14 +241,14 @@ export default function Home() {
 					objectFit="cover"
 				/>
 				<div className="absolute inset-0 bg-black opacity-50"></div>
-				<div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center">
-					<p className="text-3xl md:text-5xl font-bold mb-4">
-						Creating beautiful and functional websites
+				<div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-4">
+					<p className="text-4xl md:text-6xl font-extrabold leading-tight mb-6 drop-shadow-lg">
+						Transforming Visions into Engaging Digital Experiences
 					</p>
 					<a
 						href="#about"
 						onClick={() => scrollToSection(aboutRef)}
-						className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded text-lg md:text-xl"
+						className="bg-[#CC6600] hover:bg-[#A34F00] text-white font-bold py-3 px-8 rounded-full text-xl md:text-2xl uppercase tracking-wide shadow-lg transform transition duration-300 hover:scale-105"
 					>
 						Get Started
 					</a>
@@ -268,26 +258,59 @@ export default function Home() {
 			{[
 				{
 					ref: aboutRef,
+
 					title: "About Me",
-					content: <AboutContent />,
+
+					content: (
+						<AboutContent
+							scrollToSection={scrollToSection}
+							servicesRef={servicesRef}
+							contactRef={contactRef}
+						/>
+					),
+
 					icon: faLightbulb,
 				},
+
 				{
 					ref: servicesRef,
+
 					title: "Services",
-					content: <ServicesContent />,
+
+					content: (
+						<ServicesContent
+							scrollToSection={scrollToSection}
+							portfolioRef={portfolioRef}
+							contactRef={contactRef}
+						/>
+					),
+
 					icon: faCode,
 				},
+
 				{
 					ref: portfolioRef,
+
 					title: "Portfolio",
-					content: <PortfolioContent openModal={openModal} />,
+
+					content: (
+						<PortfolioContent
+							openModal={openModal}
+							scrollToSection={scrollToSection}
+							contactRef={contactRef}
+						/>
+					),
+
 					icon: faBriefcase,
 				},
+
 				{
 					ref: contactRef,
+
 					title: "Contact",
+
 					content: <ContactContent />,
+
 					icon: faEnvelope,
 				},
 			].map((sectionData, index) => (
@@ -300,30 +323,34 @@ export default function Home() {
 					}}
 				>
 					<div className="container mx-auto">
-						<div className="flex items-center pb-4 pt-4 pl-4">
+						<div className="flex items-center pb-4 pt-4">
 							<FontAwesomeIcon
 								icon={sectionData.icon}
-								className="text-4xl mr-4 text-gray-600 max-w-16"
+								className="text-5xl mr-4 text-[#CC6600]"
 							/>
 							<h2
-								className="text-3xl md:text-4xl font-bold section-title"
-								style={{ fontFamily: modernFont, textAlign: "left" }}
+								className="text-4xl md:text-5xl font-extrabold section-title"
+								style={{ textAlign: "left" }}
 							>
 								{sectionData.title}
 							</h2>
 						</div>
 
-						<div className="section-content" style={{ fontFamily: modernFont }}>
-							{sectionData.content}
-						</div>
+						<div className="section-content">{sectionData.content}</div>
 					</div>
 				</section>
 			))}
 
 			{/* Modal */}
 			{selectedImage && (
-				<div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4">
-					<div className="relative max-w-full max-h-full">
+				<div
+					className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4"
+					onClick={closeModal}
+				>
+					<div
+						className="relative max-w-full max-h-full"
+						onClick={(e) => e.stopPropagation()}
+					>
 						<Image
 							src={selectedImage}
 							alt="Gallery Image"
@@ -339,7 +366,7 @@ export default function Home() {
 						/>
 						<button
 							onClick={closeModal}
-							className="absolute top-4 right-4  text-xl z-10"
+							className="absolute top-4 right-4 text-xl z-10 bg-white/20 rounded-full p-2"
 							aria-label="Close Modal"
 						>
 							<FontAwesomeIcon
@@ -370,11 +397,14 @@ export default function Home() {
 				.section-content li {
 					margin-bottom: 0.5rem;
 				}
+				.logo-dark {
+					filter: brightness(0) saturate(100%); /* Makes white SVG black */
+				}
 			`}</style>
 		</div>
 	);
 }
-const AboutContent = () => {
+const AboutContent = ({ scrollToSection, servicesRef, contactRef }) => {
 	const values = [
 		{
 			icon: faPalette,
@@ -427,79 +457,90 @@ const AboutContent = () => {
 	}, []);
 
 	return (
-		<div>
+		<>
 			{/* Responsive container for image and text */}
-			<div className="flex flex-col md:flex-row items-start">
-				<div className="md:mr-8 md:shrink-0 w-full md:w-auto mb-4 md:mb-0 md:max-w-[27%]">
+
+			<div className="flex flex-col md:flex-row items-start mb-12">
+				<div className="md:mr-12 md:shrink-0 w-full md:w-1/3 mb-8 md:mb-0">
 					<Image
 						src={jakelouis}
 						alt={"Jake Louis"}
-						width={300}
-						height={350}
+						width={400}
+						height={450}
 						style={{ cursor: "pointer" }}
-						className="rounded-lg w-full"
+						className="rounded-lg shadow-lg w-full"
 					/>
 				</div>
+
 				<div className="md:flex-1">
-					<p className="text-lg md:text-xl leading-relaxed">
-						Blue Lotus Media is the portfolio and freelance brand of Jacob Louis, a Chilhowie, Virginia-based multimedia producer specializing in
-						web development, graphic design, music production, and video
-						editing. (Relocated from Denver in April 2024). With a deep
-						love for music, nature, and spirituality, Jacob helps
-						businesses and artists establish a strong online presence and
-						connect with their audience through innovative and visually
-						captivating content.
+					<p className="text-lg md:text-xl leading-relaxed mb-6">
+						Blue Lotus Media is the portfolio and freelance brand of Jacob
+						Louis, a Chilhowie, Virginia-based multimedia producer specializing
+						in web development, graphic design, music production, and video
+						editing. (Relocated from Denver in April 2024). With a deep love for
+						music, nature, and spirituality, Jacob helps businesses and artists
+						establish a strong online presence and connect with their audience
+						through innovative and visually captivating content.
 					</p>
-					<p className="text-lg md:text-xl leading-relaxed mt-7">
+
+					<p className="text-lg md:text-xl leading-relaxed mb-6">
 						I am passionate about creating immersive experiences that blur the
 						lines between technology and art. I bring a unique blend of
 						creativity and technical expertise to every project.
 					</p>
-					<h3 className="text-lg md:text-xl leading-relaxed mt-7">
-						My Mission
-					</h3>
-					<p className="text-lg md:text-xl leading-relaxed mt-7">
-						At Blue Lotus Media, my mission is to empower businesses and
-						artists with cutting-edge creative content that captures the essence
-						of their brand identity and resonates with their target audience.{" "}
+
+					<h3 className="text-2xl font-bold mb-4">My Mission</h3>
+
+					<p className="text-lg md:text-xl leading-relaxed">
+						At Blue Lotus Media, my mission is to empower businesses and artists
+						with cutting-edge creative content that captures the essence of
+						their brand identity and resonates with their target audience.{" "}
 					</p>
-					<p className="text-lg md:text-xl leading-relaxed mt-7">
+
+					<p className="text-lg md:text-xl leading-relaxed mt-4">
 						I believe in the power of visual storytelling to create deeper
 						connections and leave a lasting impression.
 					</p>
 				</div>
 			</div>
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-5 justify-center">
+
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
 				{values.map((value, index) => (
 					<div
 						key={index}
 						className={`value-item ${
 							isVisible[index] ? "animate-fadeIn" : ""
-						} transition-opacity duration-500 opacity-0`}
+						} transition-opacity duration-500 opacity-0 p-6 bg-white rounded-lg shadow-lg flex flex-col items-center text-center`}
 					>
-						<div className="flex flex-col items-center">
-							<FontAwesomeIcon
-								icon={value.icon}
-								className="text-4xl text-blue-500 mb-4"
-							/>
-							<h4 className="text-xl font-bold mb-2">{value.title}</h4>
-							<p className="text-lg md:text-xl leading-relaxed text-center">
-								{value.description}
-							</p>
-						</div>
+						<FontAwesomeIcon
+							icon={value.icon}
+							className="text-5xl text-[#CC6600] mb-4"
+						/>{" "}
+						<h4 className="text-xl font-bold mb-2">{value.title}</h4>
+						<p className="text-base leading-relaxed">{value.description}</p>
 					</div>
 				))}
 			</div>
+
+			<div className="flex justify-center mt-12">
+				                                                    <a
+				                                                        href="#services"
+				                                                        onClick={() => scrollToSection(servicesRef)}
+				                                                        className="bg-[#CC6600] hover:bg-[#A34F00] text-white font-bold py-3 px-8 rounded-full text-xl uppercase tracking-wide shadow-lg transform transition duration-300 hover:scale-105"
+				                                                    >
+				                                                        Explore Services
+				                                                    </a>			</div>
+
 			<style jsx>{`
 				.animate-fadeIn {
 					opacity: 1;
 				}
 			`}</style>
-		</div>
+		</>
 	);
 };
 
-const ServicesContent = () => {
+const ServicesContent = ({ scrollToSection, portfolioRef, contactRef }) => {
 	const services = [
 		{
 			icon: faCode,
@@ -578,40 +619,59 @@ const ServicesContent = () => {
 	}, []); // Correctly add empty dependency array
 
 	return (
-		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-			{services.map((service, index) => (
-				<div
-					key={index}
-					className={`service-item ${
-						isVisible[index] ? "animate-fadeIn" : ""
-					} transition-opacity duration-500 opacity-0`}
-				>
-					<div className="flex flex-col items-center p-6 bg-white rounded-lg shadow services">
-						<FontAwesomeIcon
-							icon={service.icon}
-							className="text-4xl text-blue-500 mb-4"
-						/>
-						<h3 className="text-xl font-bold mb-2">{service.title}</h3>
-						<p className="text-lg text-center">{service.description}</p>
+		<>
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				{services.map((service, index) => (
+					<div
+						key={index}
+						className={`service-item ${
+							isVisible[index] ? "animate-fadeIn" : ""
+						} transition-opacity duration-500 opacity-0`}
+					>
+						<div className="flex flex-col items-center p-8 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 services">
+							<FontAwesomeIcon
+								icon={service.icon}
+								className="text-5xl text-[#CC6600] mb-4"
+							/>
+
+							<h3 className="text-xl font-bold mb-2">{service.title}</h3>
+
+							<p className="text-base text-center">{service.description}</p>
+						</div>
 					</div>
-				</div>
-			))}
+				))}
+			</div>
+
+			<div className="flex justify-center mt-12">
+				<a
+					href="#portfolio"
+					onClick={() => scrollToSection(portfolioRef)}
+					className="bg-[#CC6600] hover:bg-[#A34F00] text-white font-bold py-3 px-8 rounded-full text-xl uppercase tracking-wide shadow-lg transform transition duration-300 hover:scale-105"
+				>
+					Browse Portfolio
+				</a>
+			</div>
+
 			<style jsx>{`
 				.animate-fadeIn {
 					opacity: 1;
 				}
+
 				.services {
 					min-height: 14rem; /* Adjust the value as needed */
+
 					display: flex;
+
 					flex-direction: column;
+
 					justify-content: center; /* Vertically center content */
 				}
 			`}</style>
-		</div>
+		</>
 	);
 };
 
-const PortfolioContent = ({ openModal }) => {
+const PortfolioContent = ({ openModal, scrollToSection, contactRef }) => {
 	const images = [
 		// Moved outside the component
 		{ src: galleryImage1, alt: "Image 1" },
@@ -694,25 +754,37 @@ const PortfolioContent = ({ openModal }) => {
 	}, []); // Correctly add empty dependency array
 
 	return (
-		<div className="masonry-grid">
-			{images.map((image, index) => (
-				<div
-					key={index}
-					className={`masonry-grid-item ${
-						imageVisibility[index] ? "animate-fadeIn" : ""
-					} transition-opacity duration-500 opacity-0`}
-					ref={(el) => (imageRefs.current[index] = el)} // Assign ref correctly
+		<>
+			<div className="masonry-grid">
+				{images.map((image, index) => (
+					<div
+						key={index}
+						className={`masonry-grid-item ${
+							imageVisibility[index] ? "animate-fadeIn" : ""
+						} transition-opacity duration-500 opacity-0`}
+						ref={(el) => (imageRefs.current[index] = el)} // Assign ref correctly
+					>
+						<Image
+							src={image.src}
+							alt={image.alt}
+							width={400}
+							height={300}
+							onClick={() => openModal(image.src)}
+							style={{ cursor: "pointer", borderRadius: "0.5rem" }}
+							loading={index < 6 ? "eager" : "lazy"}
+						/>
+					</div>
+				))}
+			</div>
+			<div className="flex justify-center mt-12">
+				<a
+					href="#contact"
+					onClick={() => scrollToSection(contactRef)}
+					className="bg-[#CC6600] hover:bg-[#A34F00] text-white font-bold py-3 px-8 rounded-full text-xl uppercase tracking-wide shadow-lg transform transition duration-300 hover:scale-105"
 				>
-					<Image
-						src={image.src}
-						alt={image.alt}
-						width={400}
-						height={300}
-						onClick={() => openModal(image.src)}
-						style={{ cursor: "pointer" }}
-					/>
-				</div>
-			))}
+					Get in touch
+				</a>
+			</div>
 			<style jsx>{`
 				.masonry-grid {
 					display: grid;
@@ -723,61 +795,65 @@ const PortfolioContent = ({ openModal }) => {
 					opacity: 1;
 				}
 			`}</style>
-		</div>
+		</>
 	);
 };
 
 const ContactContent = () => (
-	<div className="contact">
-		<p className="text-lg md:text-xl leading-relaxed mb-4">
+	<div className="contact flex flex-col items-center justify-center text-center">
+		<p className="text-lg md:text-xl leading-relaxed mb-6 max-w-2xl">
 			Please feel free to contact me if you have any questions or would like to
-			discuss your project.
-		</p>
-		<ul className="list-disc ml-6 text-lg md:text-xl leading-relaxed mb-4">
+			discuss your project. I&apos;m always happy to connect!
+		</p>{" "}
+		<ul className="text-lg md:text-xl leading-relaxed mb-8 space-y-2">
 			<li>
 				Email:{" "}
-				<a href="mailto:jacob@bluelotusmedia.com" target="_blank">
+				<a
+					href="mailto:jacob@bluelotusmedia.com"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="text-[#CC6600] hover:text-[#A34F00] underline"
+				>
 					jacob@bluelotusmedia.com
 				</a>
 			</li>
 			<li>
 				Phone:{" "}
-				<a href="tel:+7206631087" target="_blank">
+				<a
+					href="tel:+7206631087"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="text-[#CC6600] hover:text-[#A34F00] underline"
+				>
 					(720) 663-1087
 				</a>
 			</li>
 		</ul>
-
-		<div className="flex justify-center space-x-6">
+		<div className="flex justify-center space-x-8">
 			<a
-				href="https://facebook.com/bluelotusmedia"
+				href="https://www.facebook.com/bluelotusmedia"
 				target="_blank"
 				rel="noopener noreferrer"
+				className="text-gray-700 hover:text-[#CC6600] transition-colors duration-300"
 			>
-				<FontAwesomeIcon
-					icon={faFacebook}
-					className="text-3xl text-gray-600 hover:text-blue-500 transition-colors duration-300"
-				/>
+				{" "}
+				<FontAwesomeIcon icon={faFacebook} className="text-4xl" />
 			</a>
 			<a
 				href="https://x.com/bluelotusmedia"
 				target="_blank"
 				rel="noopener noreferrer"
+				className="text-gray-700 hover:text-[#CC6600] transition-colors duration-300"
 			>
-				<FontAwesomeIcon
-					icon={faXTwitter}
-					className="text-3xl text-gray-600 hover:text-blue-500 transition-colors duration-300"
-				/>
+				<FontAwesomeIcon icon={faXTwitter} className="text-4xl" />
 			</a>
 			<a
 				href="https://instagram.com/bluelotusmedia"
 				target="_blank"
 				rel="noopener noreferrer"
+				className="text-gray-700 hover:text-[#CC6600] transition-colors duration-300"
 			>
-				<FontAwesomeIcon
-					icon={faInstagram}
-					className="text-3xl text-gray-600 hover:text-blue-500 transition-colors duration-300"
-				/>
+				<FontAwesomeIcon icon={faInstagram} className="text-4xl" />
 			</a>
 		</div>
 		<style jsx>{`
