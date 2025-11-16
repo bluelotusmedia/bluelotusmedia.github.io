@@ -380,25 +380,25 @@ const AboutContent = () => {
 			icon: faPalette,
 			title: "Creativity",
 			description:
-				"We constantly push the boundaries of creativity to deliver innovative and captivating content.",
+				"I constantly push the boundaries of creativity to deliver innovative and captivating content.",
 		},
 		{
 			icon: faPeopleGroup,
 			title: "Collaboration",
 			description:
-				"We believe in the power of collaboration and work closely with our clients to bring their vision to life.",
+				"I believe in the power of collaboration and work closely with my clients to bring their vision to life.",
 		},
 		{
 			icon: faGem,
 			title: "Quality",
 			description:
-				"We are committed to delivering high-quality content that exceeds our client's expectations.",
+				"I am committed to delivering high-quality content that exceeds my client's expectations.",
 		},
 		{
 			icon: faFire,
 			title: "Passion",
 			description:
-				"We are passionate about what we do and believe that this passion shines through in our work.",
+				"I am passionate about what I do and believe that this passion shines through in my work.",
 		},
 	];
 
@@ -442,29 +442,29 @@ const AboutContent = () => {
 				</div>
 				<div className="md:flex-1">
 					<p className="text-lg md:text-xl leading-relaxed">
-						Blue Lotus Media is a Denver-based creative agency specializing in
+						Blue Lotus Media is the portfolio and freelance brand of Jacob Louis, a Chilhowie, Virginia-based multimedia producer specializing in
 						web development, graphic design, music production, and video
-						editing. Founded by Jacob Louis, a multimedia producer with a deep
-						love for music, nature, and spirituality, Blue Lotus Media helps
+						editing. (Relocated from Denver in April 2024). With a deep
+						love for music, nature, and spirituality, Jacob helps
 						businesses and artists establish a strong online presence and
 						connect with their audience through innovative and visually
 						captivating content.
 					</p>
 					<p className="text-lg md:text-xl leading-relaxed mt-7">
-						We are passionate about creating immersive experiences that blur the
-						lines between technology and art. We bring a unique blend of
+						I am passionate about creating immersive experiences that blur the
+						lines between technology and art. I bring a unique blend of
 						creativity and technical expertise to every project.
 					</p>
 					<h3 className="text-lg md:text-xl leading-relaxed mt-7">
-						Our Mission
+						My Mission
 					</h3>
 					<p className="text-lg md:text-xl leading-relaxed mt-7">
-						At Blue Lotus Media, our mission is to empower businesses and
+						At Blue Lotus Media, my mission is to empower businesses and
 						artists with cutting-edge creative content that captures the essence
 						of their brand identity and resonates with their target audience.{" "}
 					</p>
 					<p className="text-lg md:text-xl leading-relaxed mt-7">
-						We believe in the power of visual storytelling to create deeper
+						I believe in the power of visual storytelling to create deeper
 						connections and leave a lasting impression.
 					</p>
 				</div>
