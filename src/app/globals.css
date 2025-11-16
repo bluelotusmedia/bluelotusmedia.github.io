@@ -1,25 +1,23 @@
 /* src/app/globals.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: 'Arial', sans-serif; /* Or any other font you prefer */
+  font-family: 'Lato', sans-serif;
   margin: 0; /* Remove default body margins */
 }
 
-.container {
-  background-color: #f0f7ff; /* Light blue background */
-  color: #333; /* Dark text for contrast */
-}
-
 h1, h2, h3 {
-  color: #007bff; /* Blue lotus color for headings */
+  font-family: 'Montserrat', sans-serif;
+  /* Removed hardcoded color to allow Tailwind or other styling */
 }
 
 a {
-  color: #007bff; /* Blue lotus color for links */
+  color: #FF8C00; /* Bauhaus accent orange for links */
   text-decoration: none;
 }
 
