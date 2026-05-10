@@ -45,7 +45,7 @@ export default function TermsPage() {
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4">1. Acceptance of Terms</h2>
             <p className="text-gray-600 leading-relaxed">
-              By accessing and using bluelotusmedia.com ("the Website"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Website.
+              By accessing and using bluelotusmedia.com (&quot;the Website&quot;), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Website.
             </p>
           </section>
 
@@ -78,7 +78,7 @@ export default function TermsPage() {
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4">5. Disclaimer of Warranties</h2>
             <p className="text-gray-600 leading-relaxed">
-              The Website is provided "as is" without any warranties of any kind, either express or implied. Blue Lotus Media does not warrant that the Website will be uninterrupted or error-free.
+              The Website is provided &quot;as is&quot; without any warranties of any kind, either express or implied. Blue Lotus Media does not warrant that the Website will be uninterrupted or error-free.
             </p>
           </section>
 

@@ -45,7 +45,7 @@ export default function PrivacyPage() {
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4">1. Introduction</h2>
             <p className="text-gray-600 leading-relaxed">
-              Welcome to Blue Lotus Media ("we," "our," or "us"). We respect your privacy and are committed to protecting the personal information you share with us through our website, bluelotusmedia.com.
+              Welcome to Blue Lotus Media (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). We respect your privacy and are committed to protecting the personal information you share with us through our website, bluelotusmedia.com.
             </p>
           </section>
 
