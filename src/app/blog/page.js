@@ -61,9 +61,11 @@ export default function BlogPage() {
               >
                 {post.image && (
                   <div className="h-48 w-full overflow-hidden">
-                    <img 
+                    <Image 
                       src={post.image} 
                       alt={post.title} 
+                      width={600}
+                      height={400}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>

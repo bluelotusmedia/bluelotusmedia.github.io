@@ -53,11 +53,12 @@ async function reviewPR() {
       // In a real GitHub Action, we would use the result to comment on the PR
       // and potentially approve/reject using the GH CLI.
       if (result.includes('VERDICT: APPROVE')) {
-        console.log("AI Approved the post.");
-        // execSync(`gh pr review ${prNumber} --approve --body "AI Review: Post meets high quality standards."`);
+        console.log("AI Approved the post. Merging...");
+        execSync(`gh pr review ${prNumber} --approve --body "AI Review: Post meets high quality standards."`);
+        execSync(`gh pr merge ${prNumber} --merge`);
       } else if (result.includes('VERDICT: REQUEST_CHANGES')) {
         console.log("AI Requested changes.");
-        // execSync(`gh pr review ${prNumber} --comment --body "AI Review: Changes requested for quality improvement."`);
+        execSync(`gh pr review ${prNumber} --comment --body "AI Review: Changes requested for quality improvement."`);
       }
     } catch (error) {
       console.error("Error during AI review:", error.message);

@@ -10,11 +10,28 @@ export default function SubscribeForm() {
     e.preventDefault();
     setStatus('loading');
 
-    // Simulate API call
-    setTimeout(() => {
-      setStatus('success');
-      setEmail('');
-    }, 1500);
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('_subject', 'New Blog Subscriber!');
+
+    try {
+      const response = await fetch('https://formspree.io/f/xeenpbgz', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: formData
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setEmail('');
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      setStatus('error');
+    }
   };
 
   if (status === 'success') {
@@ -23,7 +40,7 @@ export default function SubscribeForm() {
         <div className="w-16 h-16 bg-[#CC6600] rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#CC6600]/20">
           <CheckCircle2 className="w-8 h-8 text-white" />
         </div>
-        <h3 className="text-xl font-bold mb-2 text-gray-900">You're on the list!</h3>
+        <h3 className="text-xl font-bold mb-2 text-gray-900">You&apos;re on the list!</h3>
         <p className="text-gray-600">Thanks for subscribing. Stay tuned for the next AI insight.</p>
         <button 
           onClick={() => setStatus('idle')}
@@ -48,6 +65,9 @@ export default function SubscribeForm() {
           className="w-full px-6 py-4 bg-white border border-gray-200 rounded-2xl focus:outline-none focus:border-[#CC6600] transition-colors disabled:opacity-50 text-gray-900"
         />
       </div>
+      {status === 'error' && (
+        <p className="text-red-500 text-xs mt-2 absolute -bottom-6 left-1 font-bold">Something went wrong. Please try again.</p>
+      )}
       <button 
         type="submit"
         disabled={status === 'loading'}

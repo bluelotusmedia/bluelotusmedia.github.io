@@ -21,6 +21,7 @@ import {
 	faXTwitter,
 	faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
+import ContactForm from "@/components/ContactForm";
 
 // Import your images
 import jakelouis from "./images/jake-louis.png";
@@ -825,68 +826,50 @@ const PortfolioContent = ({ openModal, scrollToSection, contactRef }) => {
 
 const ContactContent = () => (
 	<div className="contact flex flex-col items-center justify-center text-center">
-		<p className="text-lg md:text-xl leading-relaxed mb-6 max-w-2xl">
+		<p className="text-lg md:text-xl leading-relaxed mb-12 max-w-2xl text-gray-600">
 			Please feel free to contact me if you have any questions or would like to
 			discuss your project. I&apos;m always happy to connect!
-		</p>{" "}
-		<ul className="text-lg md:text-xl leading-relaxed mb-8 space-y-2">
-			<li>
-				Email:{" "}
-				<a
-					href="mailto:jacob@bluelotusmedia.com"
-					target="_blank"
-					rel="noopener noreferrer"
-					className="text-[#CC6600] hover:text-[#A34F00] underline"
-				>
-					jacob@bluelotusmedia.com
-				</a>
-			</li>
-			<li>
-				Phone:{" "}
-				<a
-					href="tel:+7206631087"
-					target="_blank"
-					rel="noopener noreferrer"
-					className="text-[#CC6600] hover:text-[#A34F00] underline"
-				>
-					(720) 663-1087
-				</a>
-			</li>
-		</ul>
-		<div className="flex justify-center space-x-8">
-			<a
-				href="https://www.facebook.com/bluelotusmedia"
-				target="_blank"
-				rel="noopener noreferrer"
-				className="text-gray-700 hover:text-[#CC6600] transition-colors duration-300"
-			>
-				{" "}
-				<FontAwesomeIcon icon={faFacebook} className="text-4xl" />
-			</a>
-			<a
-				href="https://x.com/bluelotusmedia"
-				target="_blank"
-				rel="noopener noreferrer"
-				className="text-gray-700 hover:text-[#CC6600] transition-colors duration-300"
-			>
-				<FontAwesomeIcon icon={faXTwitter} className="text-4xl" />
-			</a>
-			<a
-				href="https://instagram.com/bluelotusmedia"
-				target="_blank"
-				rel="noopener noreferrer"
-				className="text-gray-700 hover:text-[#CC6600] transition-colors duration-300"
-			>
-				<FontAwesomeIcon icon={faInstagram} className="text-4xl" />
-			</a>
+		</p>
+		
+		<div className="w-full">
+			<ContactForm />
 		</div>
+
+		<div className="mt-16 flex flex-col items-center">
+			<p className="text-gray-400 font-bold uppercase tracking-widest text-xs mb-6">Or find me on</p>
+			<div className="flex justify-center space-x-8">
+				<a
+					href="https://www.facebook.com/bluelotusmedia"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="text-gray-400 hover:text-[#CC6600] transition-colors duration-300"
+				>
+					{" "}
+					<FontAwesomeIcon icon={faFacebook} className="text-3xl" />
+				</a>
+				<a
+					href="https://x.com/bluelotusmedia"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="text-gray-400 hover:text-[#CC6600] transition-colors duration-300"
+				>
+					<FontAwesomeIcon icon={faXTwitter} className="text-3xl" />
+				</a>
+				<a
+					href="https://instagram.com/bluelotusmedia"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="text-gray-400 hover:text-[#CC6600] transition-colors duration-300"
+				>
+					<FontAwesomeIcon icon={faInstagram} className="text-3xl" />
+				</a>
+			</div>
+		</div>
+
 		<style jsx>{`
 			.contact {
-				height: 62vh;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
+				min-height: 80vh;
+				padding-bottom: 4rem;
 			}
 		`}</style>
 	</div>

@@ -136,9 +136,12 @@ export default async function PostPage({ params }) {
 
         {post.image && (
           <div className="mb-16 rounded-3xl overflow-hidden border border-gray-200 shadow-xl">
-            <img 
+            <Image 
               src={post.image} 
               alt={post.title} 
+              width={1200}
+              height={675}
+              priority
               className="w-full h-auto object-cover max-h-[500px]"
             />
           </div>
