@@ -7,7 +7,29 @@ import logo from '../images/logo.svg';
 
 export const metadata = {
   title: 'Blog | Blue Lotus Media',
-  description: 'Latest insights on AI, Tech, Web Development, and Digital Trends.',
+  description: 'Latest insights on AI, Tech, Web Development, and Digital Trends. Expert analysis from the intersection of technology and creativity.',
+  openGraph: {
+    title: 'Blog | Blue Lotus Media',
+    description: 'Latest insights on AI, Tech, Web Development, and Digital Trends.',
+    url: 'https://bluelotusmedia.com/blog',
+    siteName: 'Blue Lotus Media',
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=630&fit=crop',
+        width: 1200,
+        height: 630,
+        alt: 'Blue Lotus Media Blog',
+      }
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog | Blue Lotus Media',
+    description: 'Latest insights on AI, Tech, Web Development, and Digital Trends.',
+    images: ['https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=630&fit=crop'],
+  },
 };
 
 export default function BlogPage() {

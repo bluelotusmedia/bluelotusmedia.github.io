@@ -72,8 +72,38 @@ export default async function PostPage({ params }) {
 
   const postUrl = `https://bluelotusmedia.com/blog/${slug}`;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.description,
+    "image": post.image,
+    "datePublished": post.date,
+    "author": {
+      "@type": "Person",
+      "name": "Jake Louis",
+      "url": "https://bluelotusmedia.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Blue Lotus Media",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://bluelotusmedia.com/favicon.svg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": postUrl
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F0F8FF] text-gray-900 pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Blog Navbar */}
       <nav className="fixed top-0 w-full z-50 bg-white shadow-md py-4 px-6 md:px-12">
         <div className="max-w-7xl mx-auto flex items-center justify-between">

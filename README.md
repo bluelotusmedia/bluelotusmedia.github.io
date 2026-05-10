@@ -28,11 +28,24 @@ To empower businesses and artists with cutting-edge creative content that captur
 
 ---
 
+## 🤖 Autonomous Content Pipeline
+The blog is powered by a high-fidelity AI pipeline using Google's **Gemini 1.5 Pro**:
+1.  **Writer Agent**: Features a **Trend Analysis** stage. It dynamically identifies high-authority, trending topics for 2026 across six categories: Web Dev, AI, Music, Design, Video, and Marketing. Generates 1500-2000+ word deep dives 4x daily.
+2.  **Reviewer Agent**: Performs a critical technical audit. Only posts that meet strict standards for depth, accuracy, and formatting (H1-H3 hierarchy, data tables) are automatically merged.
+3.  **Deployment**: Automated via GitHub Actions, ensuring a constant stream of expert-level insights.
+
+---
+
 ## 💼 Portfolio
 I specialize in branding, corporate identity, and artistic conceptualization. My work includes:
 *   **Branding & Identity**: Blue Lotus Branding, Antandra Logo series.
 *   **Design & Layout**: Moogfest Event Posters, Business Card designs.
 *   **Artistic Concepts**: Whale Trance, Hawaii Illustrations.
+
+---
+
+## ✍️ Latest Insights
+Stay up to date with the latest trends in AI, design, and web development on the **[Blue Lotus Blog](https://bluelotusmedia.com/blog)**.
 
 ---
 
@@ -45,11 +58,6 @@ I specialize in branding, corporate identity, and artistic conceptualization. My
 
 > "Jacob is a great designer and web developer... built a website better than I could have imagined in a really timely manner."
 > — **Xam Devesh**, Marketing Director at SOAR ADHD Camp
-
----
-
-## ✍️ Latest Insights
-Stay up to date with the latest trends in AI, design, and web development on the **[Blue Lotus Blog](https://bluelotusmedia.com/blog)**.
 
 ---
 

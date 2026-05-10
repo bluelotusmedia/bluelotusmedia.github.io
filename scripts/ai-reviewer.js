@@ -25,23 +25,24 @@ async function reviewPR() {
     const content = fs.readFileSync(file, 'utf8');
     
     const prompt = `
-      Task: Review the following AI-generated blog post for quality and SEO.
+      Task: Perform a critical, expert-level review of the following technical blog post.
       File: ${file}
       
-      Content:
-      ${content}
+      Review Standards:
+      1. Technical Depth: Does it provide genuine insight or is it surface-level? It must be sophisticated.
+      2. Length: Is it at least 1500 words? (Reject if it's significantly shorter than the target).
+      3. Formatting: Does it use a clear H1/H2/H3 hierarchy, bullet points, and tables where appropriate?
+      4. Value: Does it offer actionable advice or unique perspectives for technical readers?
+      5. Accuracy: Does the information reflect current (2025/2026) tech trends and accurate concepts?
       
-      Standards:
-      1. High quality writing, no fluff.
-      2. Clear H1, H2, H3 hierarchy.
-      3. Proper SEO frontmatter (title, description, tags).
-      4. Value-driven content for the reader.
+      Content to Review:
+      ${content}
       
       Output your review in this exact format:
       VERDICT: [APPROVE, REQUEST_CHANGES, DENY]
-      REASONING: [Explain why]
+      REASONING: [Provide a detailed critique based on the 5 standards above]
       
-      If the verdict is APPROVE, your response must contain the word "APPROVE" prominently.
+      IMPORTANT: Only APPROVE if the post is truly exceptional, detailed, and accurate.
     `;
 
     try {
