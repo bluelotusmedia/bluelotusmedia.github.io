@@ -75,8 +75,8 @@ export default async function PostPage({ params }) {
   return (
     <div className="min-h-screen bg-[#F0F8FF] text-gray-900 pb-20">
       {/* Blog Navbar */}
-      <nav className="fixed top-0 w-full z-50 bg-white shadow-md py-2 px-4">
-        <div className="container mx-auto flex items-center justify-between">
+      <nav className="fixed top-0 w-full z-50 bg-white shadow-md py-4 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link href="/">
             <Image
               src={logo}
@@ -96,7 +96,7 @@ export default async function PostPage({ params }) {
         </div>
       </nav>
 
-      <article className="container mx-auto px-6 max-w-4xl pt-32">
+      <article className="max-w-4xl mx-auto px-6 md:px-12 pt-32">
         <Link 
           href="/blog"
           className="inline-flex items-center gap-2 text-gray-500 hover:text-[#CC6600] mb-12 transition-colors group font-bold"

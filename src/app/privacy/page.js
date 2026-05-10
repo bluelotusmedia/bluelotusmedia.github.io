@@ -93,15 +93,14 @@ export default function PrivacyPage() {
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4">6. Your Rights</h2>
             <p className="text-gray-600 leading-relaxed">
-              You have the right to request access to the personal data we hold about you, to request corrections, or to request that we delete your information. To exercise these rights, please contact us at REDACTED.
+              You have the right to request access to the personal data we hold about you, to request corrections, or to request that we delete your information. To exercise these rights, please contact us through the contact form on our website.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold mb-4">7. Contact Us</h2>
             <p className="text-gray-600 leading-relaxed">
-              If you have any questions about this Privacy Policy, please contact us at:<br />
-              <strong>Email:</strong> REDACTED
+              If you have any questions about this Privacy Policy, please contact us through the contact form on our homepage.
             </p>
           </section>
         </div>

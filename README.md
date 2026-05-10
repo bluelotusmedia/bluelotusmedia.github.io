@@ -57,7 +57,6 @@ Stay up to date with the latest trends in AI, design, and web development on the
 Ready to start your next project? Let's connect!
 
 *   **Website**: [bluelotusmedia.com](https://bluelotusmedia.com)
-*   **Email**: [REDACTED](mailto:REDACTED)
 *   **Social**: [Facebook](https://facebook.com/bluelotusmedia) | [Instagram](https://instagram.com/bluelotusmedia) | [X (Twitter)](https://x.com/bluelotusmedia)
 
 ---

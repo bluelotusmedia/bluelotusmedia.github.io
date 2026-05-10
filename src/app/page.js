@@ -142,7 +142,7 @@ export default function Home() {
 					isScrolled ? "bg-white shadow-md" : "bg-gray-900 md:bg-transparent vignette-gradient"
 				}`}
 			>
-				<div className="mx-auto py-2 flex items-center justify-between">
+				<div className="max-w-7xl mx-auto py-4 px-6 md:px-12 flex items-center justify-between">
 					<Image
 						src={logo}
 						alt="Blue Lotus Media Logo"
@@ -150,10 +150,10 @@ export default function Home() {
 						height={50}
 						onClick={scrollToTop}
 						style={{ cursor: "pointer" }}
-						className={`pl-4 transition-all duration-300 ${isScrolled ? "brightness-0 hover:brightness-100" : ""}`}
+						className={`transition-all duration-300 ${isScrolled ? "brightness-0 hover:brightness-100" : ""}`}
 					/>
 																				<button
-																					className={`md:hidden pr-4 ${isScrolled ? "text-[#333333]" : "text-white"}`} // Conditional text color for hamburger icon
+																					className={`md:hidden ${isScrolled ? "text-[#333333]" : "text-white"}`} // Conditional text color for hamburger icon
 																					onClick={toggleMenu}
 																					aria-label="Toggle Menu"
 																				>						<svg
@@ -341,12 +341,12 @@ export default function Home() {
 					key={sectionData.title}
 					id={sectionData.id}
 					ref={sectionData.ref}
-					className={`min-h-screen py-16 px-8 md:px-24 transition-colors duration-500`}
+					className={`min-h-screen py-24 px-6 md:px-12 transition-colors duration-500`}
 					style={{
 						backgroundColor: lotusColors[index % lotusColors.length],
 					}}
 				>
-					<div className="container mx-auto">
+					<div className="max-w-7xl mx-auto">
 						<div className="flex items-center pb-4 pt-4">
 							<FontAwesomeIcon
 								icon={sectionData.icon}

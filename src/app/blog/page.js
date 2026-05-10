@@ -16,8 +16,8 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-[#F0F8FF] text-gray-900 pb-20">
       {/* Blog Navbar */}
-      <nav className="fixed top-0 w-full z-50 bg-white shadow-md py-2 px-4">
-        <div className="container mx-auto flex items-center justify-between">
+      <nav className="fixed top-0 w-full z-50 bg-white shadow-md py-4 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link href="/">
             <Image
               src={logo}
@@ -37,7 +37,7 @@ export default function BlogPage() {
         </div>
       </nav>
 
-      <div className="container mx-auto px-6 pt-32">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 pt-32">
         <header className="mb-16 text-center">
           <h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-gray-900">
             Digital Insights
