@@ -9,25 +9,13 @@ export const metadata = {
   description: 'Terms of Service for Blue Lotus Media.',
 };
 
+import Navbar from '@/components/Navbar';
+
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-[#F0F8FF] text-gray-900">
-      <nav className="fixed top-0 w-full z-50 bg-white shadow-md py-2 px-4">
-        <div className="container mx-auto flex items-center justify-between">
-          <Link href="/">
-            <Image
-              src={logo}
-              alt="Blue Lotus Media Logo"
-              width={250}
-              height={40}
-              className="brightness-0 hover:brightness-100 transition-all duration-300 cursor-pointer"
-            />
-          </Link>
-          <Link href="/blog" className="text-gray-600 hover:text-[#CC6600] font-medium transition-colors">Blog</Link>
-        </div>
-      </nav>
-
-      <main className="container mx-auto px-6 max-w-4xl pt-32 pb-20">
+      <Navbar isHome={false} />
+      <main id="main-content" className="container mx-auto px-6 max-w-4xl pt-32 pb-20">
         <Link 
           href="/"
           className="inline-flex items-center gap-2 text-gray-500 hover:text-[#CC6600] mb-12 transition-colors group font-bold"

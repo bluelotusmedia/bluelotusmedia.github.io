@@ -5,7 +5,7 @@ import { faFacebook, faInstagram, faXTwitter } from '@fortawesome/free-brands-sv
 
 export default function Footer() {
   return (
-    <footer className="bg-white py-12 border-t border-gray-100">
+    <footer className="w-full bg-white py-12 border-t border-gray-100">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-gray-400 text-sm">

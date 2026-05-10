@@ -761,7 +761,5 @@ const ContactContent = () => (
 		<div className="w-full">
 			<ContactForm />
 		</div>
-
-		<Footer />
 	</div>
 );
