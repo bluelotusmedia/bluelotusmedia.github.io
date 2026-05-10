@@ -26,50 +26,11 @@ import Footer from "@/components/Footer";
 
 // Import your images
 import jakelouis from "./images/jake-louis.png";
-import galleryImage1 from "./images/gallery1.jpg";
-import galleryImage2 from "./images/gallery2.jpg";
-import galleryImage3 from "./images/gallery3.jpg";
-import galleryImage4 from "./images/gallery4.jpg";
-import galleryImage5 from "./images/gallery5.jpg";
-import galleryImage6 from "./images/gallery6.jpg";
-import galleryImage7 from "./images/gallery7.jpg";
-import galleryImage8 from "./images/gallery8.jpg";
 import galleryImage9 from "./images/gallery9.jpg";
 import galleryImage10 from "./images/gallery10.jpg";
-import galleryImage11 from "./images/gallery11.jpg";
 import galleryImage12 from "./images/gallery12.jpg";
-import galleryImage13 from "./images/gallery13.jpg";
-import galleryImage14 from "./images/gallery14.jpg";
-import galleryImage15 from "./images/gallery15.jpg";
-import galleryImage16 from "./images/gallery16.jpg";
-import galleryImage17 from "./images/gallery17.jpg";
-import galleryImage18 from "./images/gallery18.jpg";
-import galleryImage19 from "./images/gallery19.jpg";
-import galleryImage20 from "./images/gallery20.jpg";
-import galleryImage21 from "./images/gallery21.jpg";
-import galleryImage22 from "./images/gallery22.jpg";
-import galleryImage23 from "./images/gallery23.jpg";
-import galleryImage24 from "./images/gallery24.jpg";
-import galleryImage25 from "./images/gallery25.jpg";
-import galleryImage26 from "./images/gallery26.jpg";
-import galleryImage27 from "./images/gallery27.jpg";
-import galleryImage28 from "./images/gallery28.jpg";
-import galleryImage29 from "./images/gallery29.jpg";
-import galleryImage30 from "./images/gallery30.jpg";
-import galleryImage31 from "./images/gallery31.jpg";
-import galleryImage32 from "./images/gallery32.jpg";
-import galleryImage33 from "./images/gallery33.jpg";
-import galleryImage34 from "./images/gallery34.jpg";
 import galleryImage35 from "./images/gallery35.jpg";
-import galleryImage36 from "./images/gallery36.jpg";
-import galleryImage37 from "./images/gallery37.jpg";
-import galleryImage38 from "./images/gallery38.jpg";
-import galleryImage39 from "./images/gallery39.jpg";
-import galleryImage40 from "./images/gallery40.jpg";
-import galleryImage41 from "./images/gallery41.jpg";
 import galleryImage42 from "./images/gallery42.jpg";
-import galleryImage43 from "./images/gallery43.jpg";
-import galleryImage44 from "./images/gallery44.jpg";
 import galleryImage45 from "./images/gallery45.jpg";
 import galleryImage46 from "./images/gallery46.jpg";
 import galleryImage47 from "./images/gallery47.jpg";
@@ -699,57 +660,17 @@ const ServicesContent = ({ scrollToSection, portfolioRef, contactRef }) => {
 
 const PortfolioContent = ({ openModal, scrollToSection, contactRef }) => {
 	const images = [
-		// Moved outside the component
-		{ src: galleryImage1, alt: "Image 1" },
-		{ src: galleryImage2, alt: "Image 2" },
-		{ src: galleryImage3, alt: "Image 3" },
-		{ src: galleryImage4, alt: "Image 4" },
-		{ src: galleryImage5, alt: "Image 5" },
-		{ src: galleryImage6, alt: "Image 6" },
-		{ src: galleryImage7, alt: "Image 7" },
-		{ src: galleryImage8, alt: "Image 8" },
-		{ src: galleryImage9, alt: "Image 9" },
-		{ src: galleryImage10, alt: "Image 10" },
-		{ src: galleryImage11, alt: "Image 11" },
-		{ src: galleryImage12, alt: "Image 12" },
-		{ src: galleryImage13, alt: "Image 13" },
-		{ src: galleryImage14, alt: "Image 14" },
-		{ src: galleryImage15, alt: "Image 15" },
-		{ src: galleryImage16, alt: "Image 16" },
-		{ src: galleryImage17, alt: "Image 17" },
-		{ src: galleryImage18, alt: "Image 18" },
-		{ src: galleryImage19, alt: "Image 19" },
-		{ src: galleryImage20, alt: "Image 20" },
-		{ src: galleryImage21, alt: "Image 21" },
-		{ src: galleryImage22, alt: "Image 22" },
-		{ src: galleryImage23, alt: "Image 23" },
-		{ src: galleryImage24, alt: "Image 24" },
-		{ src: galleryImage25, alt: "Image 25" },
-		{ src: galleryImage26, alt: "Image 26" },
-		{ src: galleryImage27, alt: "Image 27" },
-		{ src: galleryImage28, alt: "Image 28" },
-		{ src: galleryImage29, alt: "Image 29" },
-		{ src: galleryImage30, alt: "Image 30" },
-		{ src: galleryImage31, alt: "Image 31" },
-		{ src: galleryImage32, alt: "Image 32" },
-		{ src: galleryImage33, alt: "Image 33" },
-		{ src: galleryImage34, alt: "Image 34" },
-		{ src: galleryImage35, alt: "Image 35" },
-		{ src: galleryImage36, alt: "Image 36" },
-		{ src: galleryImage37, alt: "Image 37" },
-		{ src: galleryImage38, alt: "Image 38" },
-		{ src: galleryImage39, alt: "Image 39" },
-		{ src: galleryImage40, alt: "Image 40" },
-		{ src: galleryImage41, alt: "Image 41" },
-		{ src: galleryImage42, alt: "Image 42" },
-		{ src: galleryImage43, alt: "Image 43" },
-		{ src: galleryImage44, alt: "Image 44" },
-		{ src: galleryImage45, alt: "Image 45" },
-		{ src: galleryImage46, alt: "Image 46" },
-		{ src: galleryImage47, alt: "Image 47" },
-		{ src: galleryImage48, alt: "Image 48" },
-		{ src: galleryImage49, alt: "Image 49" },
-		{ src: galleryImage50, alt: "Image 50" },
+		{ src: galleryImage9, alt: "Blue Lotus Branding" },
+		{ src: galleryImage10, alt: "Business Card Design" },
+		{ src: galleryImage12, alt: "Corporate Identity" },
+		{ src: galleryImage35, alt: "Moogfest Event Poster" },
+		{ src: galleryImage42, alt: "Whale Trance Concept" },
+		{ src: galleryImage45, alt: "Antandra Logo Red" },
+		{ src: galleryImage46, alt: "Antandra Logo Purple" },
+		{ src: galleryImage47, alt: "Antandra Logo Green" },
+		{ src: galleryImage48, alt: "Antandra Logo Cyan" },
+		{ src: galleryImage49, alt: "Antandra Logo Gold" },
+		{ src: galleryImage50, alt: "Hawaii Illustration" },
 	];
 
 	const [imageVisibility, setImageVisibility] = useState(
