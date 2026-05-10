@@ -4,9 +4,7 @@ import path from "path";
 const nextConfig = {
 	output: "export",
 	images: { unoptimized: true },
-	experimental: {
-		outputFileTracingRoot: path.join(process.cwd(), "./"),
-	},
+	outputFileTracingRoot: path.join(process.cwd(), "./"),
 };
 
 export default nextConfig;

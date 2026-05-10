@@ -839,5 +839,3 @@ const ContactContent = () => (
 		<Footer />
 	</div>
 );
-
-export default Home;
