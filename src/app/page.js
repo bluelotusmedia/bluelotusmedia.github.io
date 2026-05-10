@@ -24,6 +24,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 // Import your images
 import jakelouis from "./images/jake-louis.png";
@@ -45,42 +46,14 @@ export default function Home() {
 	const portfolioRef = useRef(null);
 	const testimonialsRef = useRef(null);
 	const contactRef = useRef(null);
-	const navRef = useRef(null);
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [selectedImage, setSelectedImage] = useState(null);
-	const [isScrolled, setIsScrolled] = useState(false); // Track scroll state
-
-	const scrollToTop = () => {
-		window.scrollTo({
-			top: 0,
-			behavior: "smooth",
-		});
-	};
+	const lotusColors = ["#F0F8FF", "#F5FFFA", "#F0FFFF", "#F8F8FF", "#FFF5EE"];
 
 	const scrollToSection = (ref) => {
 		if (ref && ref.current) {
 			ref.current.scrollIntoView({ behavior: "smooth" });
 		}
 	};
-
-	useEffect(() => {
-		const handleScroll = () => {
-			if (window.scrollY > 100) {
-				setIsScrolled(true);
-			} else {
-				setIsScrolled(false);
-			}
-		};
-
-		window.addEventListener("scroll", handleScroll);
-		return () => window.removeEventListener("scroll", handleScroll);
-	}, []);
-
-	const toggleMenu = () => {
-		setIsMenuOpen(!isMenuOpen);
-	};
-
-	const lotusColors = ["#F0F8FF", "#F5FFFA", "#F0FFFF", "#F8F8FF", "#FFF5EE"];
 
 	const openModal = (image) => {
 		setSelectedImage(image);
@@ -136,115 +109,8 @@ export default function Home() {
 
 	return (
 		<div style={{ background: "#F0F8FF" }} className="min-h-screen">
-			<nav
-				ref={navRef}
-				className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-					isScrolled ? "bg-white shadow-md" : "bg-gray-900 md:bg-transparent vignette-gradient"
-				}`}
-			>
-				<div className="max-w-7xl mx-auto py-4 px-6 md:px-12 flex items-center justify-between">
-					<Image
-						src={logo}
-						alt="Blue Lotus Media Logo"
-						width={300}
-						height={50}
-						onClick={scrollToTop}
-						style={{ cursor: "pointer" }}
-						className={`transition-all duration-300 ${isScrolled ? "brightness-0 hover:brightness-100" : ""}`}
-					/>
-																				<button
-																					className={`md:hidden ${isScrolled ? "text-[#333333]" : "text-white"}`} // Conditional text color for hamburger icon
-																					onClick={toggleMenu}
-																					aria-label="Toggle Menu"
-																				>						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							className="h-6 w-6 transition-all duration-300"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							{isMenuOpen ? (
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M6 18L18 6M6 6l12 12"
-								/>
-							) : (
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M4 6h16M4 12h16m-7 6h7"
-								/>
-							)}
-						</svg>
-					</button>
-					                    <ul
-											className={`${
-												isMenuOpen ? "max-h-screen fixed inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center py-4 overflow-hidden transition-all duration-300" : "max-h-0 md:max-h-full overflow-hidden"
-											} md:flex md:space-x-4 md:py-0 pr-4`}
-										>						{" "}
-						{isMenuOpen && (
-							<button
-								onClick={toggleMenu}
-								className="absolute top-4 right-4 text-white text-3xl"
-								aria-label="Close Menu"
-							>
-								<FontAwesomeIcon icon={faXmark} />
-							</button>
-						)}
-						{["About", "Services", "Portfolio", "Testimonials", "Blog", "Contact"].map((section) => (
-							<li key={section} className="w-full md:py-0 md:px-0">
-								{section === "Blog" ? (
-									<Link
-										href="/blog"
-										className={`block w-full text-center py-3 transition-colors duration-300 ${
-											isMenuOpen
-												? "text-white hover:bg-gray-700"
-												: isScrolled
-												? "text-[#333333] hover:text-[#CC6600]"
-												: "text-white hover:text-gray-300"
-										}`}
-									>
-										{section}
-									</Link>
-								) : (
-									<a
-										href={`#${section.toLowerCase()}`}
-										onClick={() => {
-											scrollToSection(
-												section === "About"
-													? aboutRef
-													: section === "Services"
-													? servicesRef
-													: section === "Portfolio"
-													? portfolioRef
-													: section === "Testimonials"
-													? testimonialsRef
-													: contactRef
-											);
-											if (window.innerWidth < 768) {
-												// Only toggle menu on mobile
-												toggleMenu();
-											}
-										}}
-										className={`block w-full text-center py-3 transition-colors duration-300 ${
-											isMenuOpen
-												? "text-white hover:bg-gray-700"
-												: isScrolled
-												? "text-[#333333] hover:text-[#CC6600]"
-												: "text-white hover:text-gray-300"
-										}`}
-									>
-										{section}
-									</a>
-								)}
-							</li>
-						))}
-					</ul>
-				</div>
-			</nav>
+			<Navbar isHome={true} />
+			<main id="main-content">
 			{/* Rest of the component (hero, about, services, etc.) is the same */}
 			<div className="relative w-screen h-screen">
 				<Image
@@ -365,42 +231,44 @@ export default function Home() {
 				</section>
 			))}
 
-			{/* Modal */}
-			{selectedImage && (
-				<div
-					className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4"
-					onClick={closeModal}
-				>
-					<div
-						className="relative max-w-full max-h-full"
-						onClick={(e) => e.stopPropagation()}
-					>
-						<Image
-							src={selectedImage}
-							alt="Gallery Image"
-							width={800}
-							height={600}
-							style={{
-								objectFit: "contain",
-								width: "100%",
-								height: "100%",
-								maxWidth: "90vw",
-								maxHeight: "90vh",
-							}}
-						/>
-						<button
-							onClick={closeModal}
-							className="absolute top-4 right-4 text-xl z-10 bg-white/20 rounded-full p-2"
-							aria-label="Close Modal"
-						>
-							<FontAwesomeIcon
-								icon={faXmark}
-								className="text-white text-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
-							/>
-						</button>
-					</div>
-				</div>
-			)}
+  {/* Modal */}
+  {selectedImage && (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4"
+      onClick={closeModal}
+    >
+      <div
+        className="relative max-w-full max-h-full"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Image
+          src={selectedImage}
+          alt="Gallery Image"
+          width={800}
+          height={600}
+          style={{
+            objectFit: "contain",
+            width: "100%",
+            height: "100%",
+            maxWidth: "90vw",
+            maxHeight: "90vh",
+          }}
+        />
+        <button
+          onClick={closeModal}
+          className="absolute top-4 right-4 text-xl z-10 bg-white/20 rounded-full p-2"
+          aria-label="Close Modal"
+        >
+          <FontAwesomeIcon
+            icon={faXmark}
+            className="text-white text-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+          />
+        </button>
+      </div>
+    </div>
+  )}
+  </main>
+  <Footer />
 
 			<style jsx>{`
 				.section-title {

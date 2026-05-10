@@ -32,34 +32,15 @@ export const metadata = {
   },
 };
 
+import Navbar from '@/components/Navbar';
+
 export default function BlogPage() {
   const posts = getSortedPostsData();
 
   return (
     <div className="min-h-screen bg-[#F0F8FF] text-gray-900 pb-20">
-      {/* Blog Navbar */}
-      <nav className="fixed top-0 w-full z-50 bg-white shadow-md py-4 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link href="/">
-            <Image
-              src={logo}
-              alt="Blue Lotus Media Logo"
-              width={250}
-              height={40}
-              className="brightness-0 hover:brightness-100 transition-all duration-300 cursor-pointer"
-            />
-          </Link>
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/#about" className="text-gray-600 hover:text-[#CC6600] font-medium transition-colors">About</Link>
-            <Link href="/#services" className="text-gray-600 hover:text-[#CC6600] font-medium transition-colors">Services</Link>
-            <Link href="/#portfolio" className="text-gray-600 hover:text-[#CC6600] font-medium transition-colors">Portfolio</Link>
-            <Link href="/blog" className="text-[#CC6600] font-bold">Blog</Link>
-            <Link href="/#contact" className="bg-[#CC6600] text-white px-6 py-2 rounded-full font-bold hover:bg-[#A34F00] transition-all">Contact</Link>
-          </div>
-        </div>
-      </nav>
-
-      <div className="max-w-7xl mx-auto px-6 md:px-12 pt-32">
+      <Navbar isHome={false} />
+      <main id="main-content" className="max-w-7xl mx-auto px-6 md:px-12 pt-32">
         <header className="mb-16 text-center">
           <h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-gray-900">
             Digital Insights
@@ -136,7 +117,7 @@ export default function BlogPage() {
             ))}
           </div>
         )}
-      </div>
+      </main>
       <Footer />
     </div>
   );

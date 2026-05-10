@@ -61,6 +61,8 @@ export async function generateMetadata({ params }) {
   }
 }
 
+import Navbar from '@/components/Navbar';
+
 export default async function PostPage({ params }) {
   const { slug } = await params;
   let post;
@@ -104,36 +106,16 @@ export default async function PostPage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* Blog Navbar */}
-      <nav className="fixed top-0 w-full z-50 bg-white shadow-md py-4 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link href="/">
-            <Image
-              src={logo}
-              alt="Blue Lotus Media Logo"
-              width={250}
-              height={40}
-              className="brightness-0 hover:brightness-100 transition-all duration-300 cursor-pointer"
-            />
+      <Navbar isHome={false} />
+      <main id="main-content" className="max-w-4xl mx-auto px-6 md:px-12 pt-32">
+        <article>
+          <Link 
+            href="/blog"
+            className="inline-flex items-center gap-2 text-gray-500 hover:text-[#CC6600] mb-12 transition-colors group font-bold"
+          >
+            <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            Back to Insights
           </Link>
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/#about" className="text-gray-600 hover:text-[#CC6600] font-medium transition-colors">About</Link>
-            <Link href="/#services" className="text-gray-600 hover:text-[#CC6600] font-medium transition-colors">Services</Link>
-            <Link href="/#portfolio" className="text-gray-600 hover:text-[#CC6600] font-medium transition-colors">Portfolio</Link>
-            <Link href="/blog" className="text-[#CC6600] font-bold">Blog</Link>
-            <Link href="/#contact" className="bg-[#CC6600] text-white px-6 py-2 rounded-full font-bold hover:bg-[#A34F00] transition-all">Contact</Link>
-          </div>
-        </div>
-      </nav>
-
-      <article className="max-w-4xl mx-auto px-6 md:px-12 pt-32">
-        <Link 
-          href="/blog"
-          className="inline-flex items-center gap-2 text-gray-500 hover:text-[#CC6600] mb-12 transition-colors group font-bold"
-        >
-          <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Back to Insights
-        </Link>
 
         <header className="mb-12">
           <div className="flex flex-wrap gap-3 mb-6">
@@ -211,6 +193,7 @@ export default async function PostPage({ params }) {
           </div>
         </footer>
       </article>
+      </main>
       <Footer />
     </div>
   );
