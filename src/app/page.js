@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import heroImage from "./images/hero-background2.jpg";
 import logo from "./images/logo.svg";
 import { useRef, useEffect, useState, useMemo } from "react";
@@ -144,10 +145,10 @@ export default function Home() {
 			<nav
 				ref={navRef}
 				className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-					isScrolled ? "bg-white shadow-md" : "bg-gray-900 md:bg-transparent"
+					isScrolled ? "bg-white shadow-md" : "bg-gray-900 md:bg-transparent vignette-gradient"
 				}`}
 			>
-				<div className="mx-auto px-4 py-2 flex items-center justify-between">
+				<div className="mx-auto py-2 flex items-center justify-between">
 					<Image
 						src={logo}
 						alt="Blue Lotus Media Logo"
@@ -155,10 +156,10 @@ export default function Home() {
 						height={50}
 						onClick={scrollToTop}
 						style={{ cursor: "pointer" }}
-						className={`${isScrolled ? "logo-dark" : ""}`}
+						className={`pl-4 ${isScrolled ? "logo-dark" : ""}`}
 					/>
 																				<button
-																					className={`md:hidden ${isScrolled ? "text-[#333333]" : "text-white"}`} // Conditional text color for hamburger icon
+																					className={`md:hidden pr-4 ${isScrolled ? "text-[#333333]" : "text-white"}`} // Conditional text color for hamburger icon
 																					onClick={toggleMenu}
 																					aria-label="Toggle Menu"
 																				>						<svg
@@ -188,7 +189,7 @@ export default function Home() {
 					                    <ul
 											className={`${
 												isMenuOpen ? "max-h-screen fixed inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center py-4 overflow-hidden transition-all duration-300" : "max-h-0 md:max-h-full overflow-hidden"
-											} md:flex md:space-x-4 md:py-0`}
+											} md:flex md:space-x-4 md:py-0 pr-4`}
 										>						{" "}
 						{isMenuOpen && (
 							<button
@@ -199,34 +200,50 @@ export default function Home() {
 								<FontAwesomeIcon icon={faXmark} />
 							</button>
 						)}
-						{["About", "Services", "Portfolio", "Contact"].map((section) => (
+						{["About", "Services", "Portfolio", "Blog", "Contact"].map((section) => (
 							<li key={section} className="w-full md:py-0 md:px-0">
-								<a
-									href={`#${section.toLowerCase()}`}
-									onClick={() => {
-										scrollToSection(
-											section === "About"
-												? aboutRef
-												: section === "Services"
-												? servicesRef
-												: section === "Portfolio"
-												? portfolioRef
-												: contactRef
-										);
-										if (window.innerWidth < 768) {
-											// Only toggle menu on mobile
-											toggleMenu();
-										}
-									}}
-																								className={`block w-full text-center py-3 transition-colors duration-300 ${
-																									isMenuOpen
-																										? "text-white hover:bg-gray-700" // Mobile: White text on dark overlay, dark gray on hover
-																										: isScrolled
-																										? "text-[#333333] hover:text-[#CC6600]" // Desktop: Dark gray when scrolled, orange on hover
-																										: "text-white hover:text-gray-300" // Desktop: White when not scrolled on desktop, light gray on hover
-																								}`}
-																							>									{section}
-								</a>{" "}
+								{section === "Blog" ? (
+									<Link
+										href="/blog"
+										className={`block w-full text-center py-3 transition-colors duration-300 ${
+											isMenuOpen
+												? "text-white hover:bg-gray-700"
+												: isScrolled
+												? "text-[#333333] hover:text-[#CC6600]"
+												: "text-white hover:text-gray-300"
+										}`}
+									>
+										{section}
+									</Link>
+								) : (
+									<a
+										href={`#${section.toLowerCase()}`}
+										onClick={() => {
+											scrollToSection(
+												section === "About"
+													? aboutRef
+													: section === "Services"
+													? servicesRef
+													: section === "Portfolio"
+													? portfolioRef
+													: contactRef
+											);
+											if (window.innerWidth < 768) {
+												// Only toggle menu on mobile
+												toggleMenu();
+											}
+										}}
+										className={`block w-full text-center py-3 transition-colors duration-300 ${
+											isMenuOpen
+												? "text-white hover:bg-gray-700"
+												: isScrolled
+												? "text-[#333333] hover:text-[#CC6600]"
+												: "text-white hover:text-gray-300"
+										}`}
+									>
+										{section}
+									</a>
+								)}
 							</li>
 						))}
 					</ul>
@@ -240,7 +257,7 @@ export default function Home() {
 					layout="fill"
 					objectFit="cover"
 				/>
-				<div className="absolute inset-0 bg-black opacity-50"></div>
+				<div className="absolute inset-0 bg-black opacity-50 vignette-gradient"></div>
 				<div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-4">
 					<p className="text-4xl md:text-6xl font-extrabold leading-tight mb-6 drop-shadow-lg">
 						Transforming Visions into Engaging Digital Experiences
@@ -399,6 +416,13 @@ export default function Home() {
 				}
 				.logo-dark {
 					filter: brightness(0) saturate(100%); /* Makes white SVG black */
+				}
+				.vignette-gradient {
+					background-image: radial-gradient(
+						at top left,
+						rgba(0, 0, 0, 0.6) 0%,
+						rgba(0, 0, 0, 0) 70%
+					);
 				}
 			`}</style>
 		</div>
