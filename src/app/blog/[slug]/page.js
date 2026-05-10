@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import ShareButtons from '@/components/ShareButtons';
 import SubscribeForm from '@/components/SubscribeForm';
+import Footer from '@/components/Footer';
 import logo from '../../images/logo.svg';
 
 export async function generateStaticParams() {
@@ -169,6 +170,7 @@ export default async function PostPage({ params }) {
           </div>
         </footer>
       </article>
+      <Footer />
     </div>
   );
 }

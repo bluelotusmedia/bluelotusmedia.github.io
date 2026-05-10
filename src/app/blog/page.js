@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getSortedPostsData } from '@/lib/blog';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
+import Footer from '@/components/Footer';
 import logo from '../images/logo.svg';
 
 export const metadata = {
@@ -114,6 +115,7 @@ export default function BlogPage() {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 }

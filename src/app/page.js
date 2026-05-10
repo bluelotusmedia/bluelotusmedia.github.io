@@ -22,6 +22,7 @@ import {
 	faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import ContactForm from "@/components/ContactForm";
+import Footer from "@/components/Footer";
 
 // Import your images
 import jakelouis from "./images/jake-louis.png";
@@ -835,42 +836,8 @@ const ContactContent = () => (
 			<ContactForm />
 		</div>
 
-		<div className="mt-16 flex flex-col items-center">
-			<p className="text-gray-400 font-bold uppercase tracking-widest text-xs mb-6">Or find me on</p>
-			<div className="flex justify-center space-x-8">
-				<a
-					href="https://www.facebook.com/bluelotusmedia"
-					target="_blank"
-					rel="noopener noreferrer"
-					className="text-gray-400 hover:text-[#CC6600] transition-colors duration-300"
-				>
-					{" "}
-					<FontAwesomeIcon icon={faFacebook} className="text-3xl" />
-				</a>
-				<a
-					href="https://x.com/bluelotusmedia"
-					target="_blank"
-					rel="noopener noreferrer"
-					className="text-gray-400 hover:text-[#CC6600] transition-colors duration-300"
-				>
-					<FontAwesomeIcon icon={faXTwitter} className="text-3xl" />
-				</a>
-				<a
-					href="https://instagram.com/bluelotusmedia"
-					target="_blank"
-					rel="noopener noreferrer"
-					className="text-gray-400 hover:text-[#CC6600] transition-colors duration-300"
-				>
-					<FontAwesomeIcon icon={faInstagram} className="text-3xl" />
-				</a>
-			</div>
-		</div>
-
-		<style jsx>{`
-			.contact {
-				min-height: 80vh;
-				padding-bottom: 4rem;
-			}
-		`}</style>
+		<Footer />
 	</div>
 );
+
+export default Home;
