@@ -57,6 +57,7 @@ export default function SubscribeForm() {
         <input 
           type="email" 
           required
+          name="email"
           placeholder="your@email.com" 
           value={email}
           onChange={(e) => setEmail(e.target.value)}
