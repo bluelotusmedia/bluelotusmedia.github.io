@@ -46,33 +46,29 @@ async function generatePost() {
     5. SEO: Use semantic HTML (H1, H2, H3), bold key terms, and naturally integrate keywords.
     6. Quality: Aim for 1000+ words. Avoid generic AI fluff. Use a professional yet creative tone.
     
-    Output the markdown directly into the file "content/blog/${fileName}".
+    IMPORTANT: Return ONLY the markdown content. Do not include any preamble or conversational text.
   `;
 
-  // We'll use the gemini command. 
-  // Since it's an interactive agent, we'll try to pipe the prompt.
-  // Note: In a real GitHub Action, we'd need the gemini CLI installed.
   try {
-    // For the purpose of this demonstration, we'll simulate the call 
-    // or use a method that works with the user's environment.
     console.log("Calling Gemini CLI...");
     
-    // Attempting to run gemini in a non-interactive way if possible
-    // or just using a fallback for now.
-    const output = execSync(`echo "${prompt.replace(/"/g, '\\"')}" | gemini --approval-mode yolo`).toString();
+    // Using the CLI as requested
+    const result = execSync(`echo "${prompt.replace(/"/g, '\\"')}" | gemini --approval-mode yolo`).toString();
     
-    // The gemini agent might create the file itself if we tell it to, 
-    // but here we expect it to output text.
-    // However, the gemini agent usually writes files directly if instructed.
-    
-    console.log("Gemini finished processing.");
-  } catch (error) {
-    console.error("Error calling Gemini CLI:", error.message);
-    
-    // Fallback for demo purposes if gemini fails in this environment
-    if (process.env.CI) {
-       throw error;
+    // Clean up response
+    const cleanedText = result.replace(/^```markdown\n/, '').replace(/\n```$/, '').trim();
+
+    // Ensure the content directory exists
+    const dir = path.dirname(filePath);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
     }
+
+    fs.writeFileSync(filePath, cleanedText);
+    console.log(`Successfully generated: ${fileName}`);
+  } catch (error) {
+    console.error("Error generating post:", error.message);
+    process.exit(1);
   }
 }
 

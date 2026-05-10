@@ -10,7 +10,6 @@ async function reviewPR() {
   }
 
   // Find changed files in the PR
-  // In a real GH Action, we can use git diff
   const changedFiles = execSync(`git diff --name-only origin/main`).toString().split('\n');
   const blogFiles = changedFiles.filter(f => f.startsWith('content/blog/') && f.endsWith('.md'));
 
@@ -50,8 +49,6 @@ async function reviewPR() {
       const result = execSync(`echo "${prompt.replace(/"/g, '\\"')}" | gemini --approval-mode yolo`).toString();
       console.log("AI Review Result:", result);
       
-      // In a real GitHub Action, we would use the result to comment on the PR
-      // and potentially approve/reject using the GH CLI.
       if (result.includes('VERDICT: APPROVE')) {
         console.log("AI Approved the post. Merging...");
         execSync(`gh pr review ${prNumber} --approve --body "AI Review: Post meets high quality standards."`);
