@@ -15,6 +15,7 @@ import {
 	faGem,
 	faFire,
 	faXmark,
+	faQuoteLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import {
 	faFacebook,
@@ -42,6 +43,7 @@ export default function Home() {
 	const aboutRef = useRef(null);
 	const servicesRef = useRef(null);
 	const portfolioRef = useRef(null);
+	const testimonialsRef = useRef(null);
 	const contactRef = useRef(null);
 	const navRef = useRef(null);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -103,6 +105,35 @@ export default function Home() {
 		};
 	}, [selectedImage]);
 
+	useEffect(() => {
+		const handleHash = () => {
+			const hash = window.location.hash;
+			if (hash) {
+				const section = hash.replace("#", "");
+				const refs = {
+					about: aboutRef,
+					services: servicesRef,
+					portfolio: portfolioRef,
+					testimonials: testimonialsRef,
+					contact: contactRef,
+				};
+				if (refs[section]) {
+					// Small delay to ensure sections are rendered and layout is stable
+					setTimeout(() => {
+						scrollToSection(refs[section]);
+					}, 300);
+				}
+			}
+		};
+
+		// Run on mount
+		handleHash();
+
+		// Listen for hash changes
+		window.addEventListener("hashchange", handleHash);
+		return () => window.removeEventListener("hashchange", handleHash);
+	}, []);
+
 	return (
 		<div style={{ background: "#F0F8FF" }} className="min-h-screen">
 			<nav
@@ -163,7 +194,7 @@ export default function Home() {
 								<FontAwesomeIcon icon={faXmark} />
 							</button>
 						)}
-						{["About", "Services", "Portfolio", "Blog", "Contact"].map((section) => (
+						{["About", "Services", "Portfolio", "Testimonials", "Blog", "Contact"].map((section) => (
 							<li key={section} className="w-full md:py-0 md:px-0">
 								{section === "Blog" ? (
 									<Link
@@ -189,6 +220,8 @@ export default function Home() {
 													? servicesRef
 													: section === "Portfolio"
 													? portfolioRef
+													: section === "Testimonials"
+													? testimonialsRef
 													: contactRef
 											);
 											if (window.innerWidth < 768) {
@@ -238,7 +271,7 @@ export default function Home() {
 			{[
 				{
 					ref: aboutRef,
-
+					id: "about",
 					title: "About Me",
 
 					content: (
@@ -254,7 +287,7 @@ export default function Home() {
 
 				{
 					ref: servicesRef,
-
+					id: "services",
 					title: "Services",
 
 					content: (
@@ -270,7 +303,7 @@ export default function Home() {
 
 				{
 					ref: portfolioRef,
-
+					id: "portfolio",
 					title: "Portfolio",
 
 					content: (
@@ -285,8 +318,18 @@ export default function Home() {
 				},
 
 				{
-					ref: contactRef,
+					ref: testimonialsRef,
+					id: "testimonials",
+					title: "Testimonials",
 
+					content: <TestimonialsContent />,
+
+					icon: faQuoteLeft,
+				},
+
+				{
+					ref: contactRef,
+					id: "contact",
 					title: "Contact",
 
 					content: <ContactContent />,
@@ -296,6 +339,7 @@ export default function Home() {
 			].map((sectionData, index) => (
 				<section
 					key={sectionData.title}
+					id={sectionData.id}
 					ref={sectionData.ref}
 					className={`min-h-screen py-16 px-8 md:px-24 transition-colors duration-500`}
 					style={{
@@ -743,6 +787,99 @@ const PortfolioContent = ({ openModal, scrollToSection, contactRef }) => {
 				}
 			`}</style>
 		</>
+	);
+};
+
+const TestimonialsContent = () => {
+	const testimonials = [
+		{
+			name: "Matthew Tuers",
+			role: "Marketing Communications Specialist",
+			text: "If there's ever a problem to be solved using technology, you'll want Jacob on the front lines. His breadth of knowledge - design apps, web development, digital marketing - made him the fulcrum behind advancements in automation and efficiency in our art/marketing communications departments.",
+		},
+		{
+			name: "Nicholas Godfrey",
+			role: "Product and Innovation",
+			text: "Jacob is a very creative thinker. While working on our web design he was very attentive and considerate of our needs and developed an end product that fit to a Tee. It was easy to get changes made on the fly which was key for us.",
+		},
+		{
+			name: "Xam Devesh",
+			role: "Marketing Director at SOAR ADHD Camp",
+			text: "Jacob is a great designer and web developer. He gave me a fair price and built a website better than I could have imaged in a really timely manner. He's been helpful every step of the way. I recommend his services to anyone looking for an artistic and intuitive website.",
+		},
+		{
+			name: "Jeff Smolinski",
+			role: "Data Scientist",
+			text: "Jacob has wizard level front-end skills. He is able to adaptable to the changing times. He is able to work with code bases that are being altered by multiple forces. He is a bright and pleasant person with creative skills above and beyond the office requirements. He is driven and constantly working to innovate to optimize the current systems.",
+		},
+		{
+			name: "Emmelyn Tan",
+			role: "UX/UI Designer",
+			text: "Jacob is a skilled and high-performing software engineer. He implemented code standards in the form of site and JavaScript templates, to make builds efficient and consistent. He also created processes and standards for site performance and source control. With Jacob’s drive for excellence and continuous improvement, any team or organization would be lucky to have him!",
+		},
+		{
+			name: "Brendan Pierpont",
+			role: "Clean Energy & Climate Expert",
+			text: "Jacob is a skilled web designer, offering dynamic and compelling websites to his clients. He's also a talented artist in sonic landscapes and other media, with an innate sense of music and unique point of view. Jacob is a truly creative individual with a capacity to add a unique touch to any project he works on.",
+		},
+		{
+			name: "Jonathan Arthur",
+			role: "Owner, Spiralflo",
+			text: "Jacob helped me design and execute the art for my album, There Is A Garden. I still marvel at what a beautiful job he did. Then a few years later, he helped my wife and I design a website for our publishing business. It was another creative and aesthetically attractive result. I would recommend his work to anyone, and he is fun and easy to work with.",
+		},
+		{
+			name: "Timothy Schultz",
+			role: "Full Stack Engineer",
+			text: "Jacob is an thoughtful and intelligent Software Engineer and a pleasure to work with.",
+		},
+	];
+
+	const [isVisible, setIsVisible] = useState(testimonials.map(() => false));
+
+	useEffect(() => {
+		const handleScroll = () => {
+			const triggers = document.querySelectorAll(".testimonial-item");
+			triggers.forEach((trigger, index) => {
+				const top = trigger.getBoundingClientRect().top;
+				const screenHeight = window.innerHeight;
+				if (top < screenHeight * 0.85) {
+					setIsVisible((prev) => {
+						const next = [...prev];
+						if (index < next.length) {
+							next[index] = true;
+						}
+						return next;
+					});
+				}
+			});
+		};
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, [testimonials.length]);
+
+	return (
+		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+			{testimonials.map((t, i) => (
+				<div
+					key={i}
+					className={`testimonial-item transition-all duration-700 transform ${
+						isVisible[i] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+					} p-8 bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 flex flex-col`}
+				>
+					<FontAwesomeIcon
+						icon={faQuoteLeft}
+						className="text-3xl text-[#CC6600]/30 mb-6 self-start"
+					/>
+					<p className="text-gray-700 italic mb-8 leading-relaxed flex-grow">
+						&quot;{t.text}&quot;
+					</p>
+					<div className="mt-auto pt-6 border-t border-gray-200/50">
+						<h4 className="text-xl font-bold text-gray-900">{t.name}</h4>
+						<p className="text-[#CC6600] font-medium text-sm mt-1">{t.role}</p>
+					</div>
+				</div>
+			))}
+		</div>
 	);
 };
 

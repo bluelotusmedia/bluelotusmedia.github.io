@@ -28,15 +28,26 @@ export async function generateMetadata({ params }) {
         title: post.title,
         description: post.description,
         url,
+        siteName: 'Blue Lotus Media',
+        locale: 'en_US',
         type: 'article',
         publishedTime: post.date,
-        authors: ['Blue Lotus AI'],
-        images: post.image ? [post.image] : [],
+        authors: ['Jake Louis'],
+        tags: post.tags || [],
+        images: post.image ? [
+          {
+            url: post.image,
+            width: 1200,
+            height: 630,
+            alt: post.title,
+          }
+        ] : [],
       },
       twitter: {
         card: 'summary_large_image',
         title: post.title,
         description: post.description,
+        creator: '@bluelotusmedia',
         images: post.image ? [post.image] : [],
       },
       alternates: {

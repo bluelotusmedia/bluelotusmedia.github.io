@@ -19,6 +19,9 @@ export default function Footer() {
             <Link href="/terms" className="text-gray-400 hover:text-[#CC6600] text-sm transition-colors">
               Terms of Service
             </Link>
+            <Link href="/#contact" className="text-gray-400 hover:text-[#CC6600] text-sm transition-colors font-bold">
+              Contact
+            </Link>
             <a
               href="https://facebook.com/bluelotusmedia"
               target="_blank"
