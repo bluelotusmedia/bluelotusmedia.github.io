@@ -150,7 +150,7 @@ export default function Home() {
 						height={50}
 						onClick={scrollToTop}
 						style={{ cursor: "pointer" }}
-						className={`pl-4 ${isScrolled ? "logo-dark" : ""}`}
+						className={`pl-4 transition-all duration-300 ${isScrolled ? "brightness-0 hover:brightness-100" : ""}`}
 					/>
 																				<button
 																					className={`md:hidden pr-4 ${isScrolled ? "text-[#333333]" : "text-white"}`} // Conditional text color for hamburger icon

@@ -20,7 +20,7 @@ export default function PrivacyPage() {
               alt="Blue Lotus Media Logo"
               width={250}
               height={40}
-              className="brightness-0 cursor-pointer"
+              className="brightness-0 hover:brightness-100 transition-all duration-300 cursor-pointer"
             />
           </Link>
           <Link href="/blog" className="text-gray-600 hover:text-[#CC6600] font-medium transition-colors">Blog</Link>
