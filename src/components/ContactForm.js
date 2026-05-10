@@ -96,6 +96,9 @@ export default function ContactForm() {
           ></textarea>
         </div>
 
+        {/* Honeypot Spam Protection */}
+        <input type="text" name="_gotcha" className="hidden" style={{ display: 'none' }} />
+
         {status === 'error' && (
           <div className="flex items-center gap-2 text-red-600 bg-red-50 p-4 rounded-xl text-sm font-medium border border-red-100">
             <FontAwesomeIcon icon={faExclamationCircle} />

@@ -10,8 +10,7 @@ export default function SubscribeForm() {
     e.preventDefault();
     setStatus('loading');
 
-    const formData = new FormData();
-    formData.append('email', email);
+    const formData = new FormData(e.target); // Use the form element to capture all fields including honeypot
     formData.append('_subject', 'New Blog Subscriber!');
 
     try {
@@ -64,6 +63,8 @@ export default function SubscribeForm() {
           disabled={status === 'loading'}
           className="w-full px-6 py-4 bg-white border border-gray-200 rounded-2xl focus:outline-none focus:border-[#CC6600] transition-colors disabled:opacity-50 text-gray-900"
         />
+        {/* Honeypot Spam Protection */}
+        <input type="text" name="_gotcha" className="hidden" style={{ display: 'none' }} />
       </div>
       {status === 'error' && (
         <p className="text-red-500 text-xs mt-2 absolute -bottom-6 left-1 font-bold">Something went wrong. Please try again.</p>
