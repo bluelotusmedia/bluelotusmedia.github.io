@@ -1,7 +1,7 @@
 name: AI Blog Generator
 on:
   schedule:
-    - cron: '0 8,20 * * *' # 8 AM and 8 PM
+    - cron: '0 2,8,14,20 * * *' # 2 AM, 8 AM, 2 PM, and 8 PM
   workflow_dispatch:
 
 jobs:
