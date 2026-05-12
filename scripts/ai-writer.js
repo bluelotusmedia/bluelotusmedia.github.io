@@ -85,7 +85,7 @@ async function generatePost() {
     tags: ["at", "least", "five", "highly", "relevant", "seo", "tags"]
     status: "published"
     readingTime: "Calculated based on 200 wpm"
-    image: "https://images.unsplash.com/photo-XXX?w=1200&h=630&fit=crop (Replace XXX with a real, high-quality Unsplash ID related to: ${topic})"
+    image: "https://images.unsplash.com/photo-XXX?w=1200&h=630&fit=crop (Replace XXX with a real, high-quality, long-form NUMERICAL Unsplash ID related to: ${topic})"
     ---
     
     Content & SEO Requirements:
@@ -107,7 +107,7 @@ async function generatePost() {
     - Tone: Visionary, professional, authoritative, and innovative. 
     - AVOID "AI-isms" (e.g., "In conclusion," "In today's fast-paced digital world," "Delve into"). Focus on unique insights and high-value technical depth.
     
-    IMAGE RESTRICTION: Do NOT use any of these Unsplash IDs (previously used): ${usedIds.join(', ')}. Provide a fresh, real, high-quality Unsplash ID related to: ${topic}.
+    IMAGE RESTRICTION: Do NOT use any of these Unsplash IDs (previously used): ${usedIds.join(', ')}. Provide a fresh, real, high-quality, long-form NUMERICAL Unsplash ID related to: ${topic}.
     
     IMPORTANT: Return ONLY the markdown content, including the frontmatter. Do not include any preamble, conversational text, or wrapper markdown code blocks if possible.
   `;
