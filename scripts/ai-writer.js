@@ -48,14 +48,22 @@ async function generatePost() {
   // Get used image IDs to avoid duplication
   const blogDir = path.join(process.cwd(), 'content/blog');
   const usedIds = [];
+  const usedTopics = [];
   if (fs.existsSync(blogDir)) {
     const blogFiles = fs.readdirSync(blogDir).filter(f => f.endsWith('.md'));
     blogFiles.forEach(file => {
       const content = fs.readFileSync(path.join(blogDir, file), 'utf8');
-      // Improved regex to catch all Unsplash photo IDs in the file
+      
+      // Collect used image IDs
       const matches = content.matchAll(/photo-([a-zA-Z0-9-]+)/g);
       for (const match of matches) {
         usedIds.push(match[1]);
+      }
+
+      // Collect existing titles to prevent duplicate topics
+      const titleMatch = content.match(/title:\s*"([^"]+)"/);
+      if (titleMatch) {
+        usedTopics.push(titleMatch[1]);
       }
     });
   }
@@ -89,13 +97,17 @@ async function generatePost() {
     Based on the category: "${category}", identify ONE highly trending, long-tail keyword topic for the current year (2026).
     The topic must have high search volume potential, answer a specific technical query, and appeal to high-end clients and technical professionals.
     
+    IMPORTANT: Do NOT suggest a topic that is similar to any of these previously covered topics:
+    ${usedTopics.join('\n- ')}
+    
     Return ONLY the topic title. No preamble. No quotes.
   `;
 
   let topic;
   try {
-    topic = execSync(`echo "${topicPrompt.replace(/"/g, '\\"')}" | gemini --approval-mode yolo`, { 
-      stdio: 'pipe'
+    topic = execSync('gemini --approval-mode yolo', { 
+      input: topicPrompt,
+      maxBuffer: 1024 * 1024 * 10
     }).toString().trim();
     
     // Clean up potential markdown formatting from the title
@@ -169,23 +181,53 @@ async function generatePost() {
   try {
     console.log("Calling Gemini CLI for content generation...");
     
-    // Using the CLI as requested
-    const result = execSync(`echo "${prompt.replace(/"/g, '\\"')}" | gemini --approval-mode yolo`, {
-      stdio: 'pipe',
+    // Generate the initial draft
+    const draftResult = execSync('gemini --approval-mode yolo', {
+      input: prompt,
       maxBuffer: 1024 * 1024 * 10 // Allow up to 10MB of output for long articles
     }).toString();
     
-    // Clean up response: remove potential markdown code block wrappers
-    let cleanedText = result.trim();
-    if (cleanedText.startsWith('\`\`\`markdown')) {
-      cleanedText = cleanedText.substring(13);
-    } else if (cleanedText.startsWith('\`\`\`')) {
-      cleanedText = cleanedText.substring(3);
+    let draft = draftResult.trim();
+    if (draft.startsWith('\`\`\`markdown')) draft = draft.substring(13);
+    else if (draft.startsWith('\`\`\`')) draft = draft.substring(3);
+    if (draft.endsWith('\`\`\`')) draft = draft.substring(0, draft.length - 3);
+    draft = draft.trim();
+
+    console.log("Submitting draft for Autonomous Quality Control (QA)...");
+
+    const reviewPrompt = `
+      Act as a Senior Editor and Quality Assurance Specialist for Blue Lotus Media.
+      Review the following blog post draft.
+      
+      Critique it based on:
+      1. High technical depth and professional tone.
+      2. Absence of annoying "AI-isms" like "In conclusion," "Delve into," or "Fast-paced digital world".
+      3. Proper Markdown formatting, including the frontmatter.
+      
+      Instructions:
+      - If the post is excellent and meets all standards, reply with EXACTLY the original draft, unmodified.
+      - If there are minor issues, "AI-isms", or formatting errors, rewrite those specific sections and reply with the CORRECTED full draft.
+      - If the post is completely generic, off-topic, or unsalvageable, reply ONLY with the word "REJECT".
+      
+      Draft to review:
+      ${draft}
+    `;
+
+    const qaResult = execSync('gemini --approval-mode yolo', {
+      input: reviewPrompt,
+      maxBuffer: 1024 * 1024 * 10
+    }).toString().trim();
+
+    let finalContent = qaResult;
+    if (finalContent.startsWith('\`\`\`markdown')) finalContent = finalContent.substring(13);
+    else if (finalContent.startsWith('\`\`\`')) finalContent = finalContent.substring(3);
+    if (finalContent.endsWith('\`\`\`')) finalContent = finalContent.substring(0, finalContent.length - 3);
+    finalContent = finalContent.trim();
+
+    if (finalContent === 'REJECT') {
+      console.error("❌ QA Review Failed: The generated post was rejected by the autonomous editor for low quality.");
+      process.exit(1);
     }
-    if (cleanedText.endsWith('\`\`\`')) {
-      cleanedText = cleanedText.substring(0, cleanedText.length - 3);
-    }
-    cleanedText = cleanedText.trim();
 
     // Ensure the content directory exists
     const dir = path.dirname(filePath);
@@ -193,8 +235,8 @@ async function generatePost() {
       fs.mkdirSync(dir, { recursive: true });
     }
 
-    fs.writeFileSync(filePath, cleanedText);
-    console.log(`Successfully generated: ${fileName}`);
+    fs.writeFileSync(filePath, finalContent);
+    console.log(`✅ Successfully generated and QA approved: ${fileName}`);
   } catch (error) {
     console.error("Error generating post.");
     if (error.stdout) console.error("STDOUT:", error.stdout.toString());
