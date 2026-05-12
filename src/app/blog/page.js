@@ -96,14 +96,15 @@ export default function BlogPage() {
                     {post.description}
                   </p>
                   
-                  <div className="mt-auto pt-6 border-t border-gray-50 flex items-center justify-between">
-                    <div className="flex flex-wrap gap-2">
-                      {post.tags?.slice(0, 2).map(tag => (
-                        <span key={tag} className="px-3 py-1 bg-[#CC6600]/5 text-[#CC6600] text-[10px] uppercase tracking-wider font-bold rounded-full border border-[#CC6600]/10">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {post.tags?.slice(0, 3).map(tag => (
+                      <span key={tag} className="px-3 py-1 bg-[#CC6600]/5 text-[#CC6600] text-[10px] uppercase tracking-wider font-bold rounded-full border border-[#CC6600]/10">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-auto pt-6 border-t border-gray-50 flex items-center justify-end">
                     <Link 
                       href={`/blog/${post.slug}`}
                       className="flex items-center gap-1 text-sm font-bold text-[#CC6600] group/link"
