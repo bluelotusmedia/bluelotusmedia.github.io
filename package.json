@@ -8,6 +8,7 @@
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
+    "rss": "node scripts/generate-rss.js",
     "blog:generate": "node scripts/manage-blog.js generate",
     "blog:list": "node scripts/manage-blog.js list",
     "blog:delete": "node scripts/manage-blog.js delete"

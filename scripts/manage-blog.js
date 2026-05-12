@@ -37,6 +37,9 @@ if (action === 'list') {
     const fileToDelete = path.join(blogDir, files[index]);
     fs.unlinkSync(fileToDelete);
     console.log(`\n✅ Successfully deleted: ${files[index]}\n`);
+    
+    // Auto-update distribution assets
+    updateAssets();
   } else {
     console.log(`\n❌ Error: Post #${indexStr} not found. Run 'npm run blog:list' first.\n`);
   }
@@ -44,8 +47,28 @@ if (action === 'list') {
   console.log('\n🚀 Initializing AI Content Engine...\n');
   try {
     execSync('node scripts/ai-writer.js', { stdio: 'inherit' });
+    
+    // Auto-update distribution assets
+    updateAssets();
   } catch (e) {
     // Error handled by ai-writer
+  }
+}
+
+function updateAssets() {
+  console.log('\n🔄 Updating distribution assets...');
+  try {
+    // Update RSS Feed
+    execSync('npm run rss', { stdio: 'inherit' });
+    
+    // Update Sitemap (if next-sitemap is installed and configured)
+    console.log('🗺️  Updating sitemap...');
+    execSync('npx next-sitemap', { stdio: 'inherit' });
+    
+    console.log('\n✨ All assets updated and ready for deployment.\n');
+  } catch (err) {
+    console.log('\n⚠️  Warning: Distribution assets could not be updated automatically.');
+    console.log('You may need to run "npm run build" to sync all changes.\n');
   }
 } else {
   console.log('\n--- Blue Lotus Blog Manager ---');
