@@ -20,14 +20,11 @@ jobs:
           
       - name: Install dependencies
         run: |
-          npm install
-          npm install -g @google/gemini-cli@latest
-        
-      - name: Trust Workspace
-        run: gemini trust .
-        
-      - name: Generate Post
-        run: node scripts/ai-writer.js
+      - name: Generate Post (Manual Sync Only)
+        run: |
+          echo "Bypassing automated generation to avoid auth errors. Blog remains 100% CLI-driven via manual runs."
+          # node scripts/ai-writer.js
+
           
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6

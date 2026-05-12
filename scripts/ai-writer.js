@@ -11,6 +11,39 @@ const categories = [
   'Digital Marketing & SEO (Conversion Optimization, Content Strategy, Analytics, Semantic Search)'
 ];
 
+// Curated pool of verified technical Unsplash IDs to guarantee high-quality, working images
+const imagePool = {
+  'Artificial Intelligence': [
+    '1697577418970-95d99b5a55cf', // AI Chip 3D
+    '1773332585861-72cf1558a6fc', // Copilot/Tech lifestyle
+    '1485827404703-89b55fcc595e', // Robot/AI
+    '1674027444485-cec3da58eef4'  // Neural plexus
+  ],
+  'Web Development': [
+    '1550751827-4bd374c3f58b', // Data security visualization
+    '1518770660439-4636190af475', // Circuit board
+    '1555066931-4365d14bab8c'  // Code screen
+  ],
+  'Graphic Design & Branding': [
+    '1533750357371-d70bb4d3805f', // Marketing icons/Design
+    '1558655146-d09347e92766', // Design process
+    '1635070041000-23097c9e7320'  // VR/3D Design
+  ],
+  'Video Editing & Cinematic Narrative': [
+    '1574717024653-61fd2cf4d44d', // Video editing software
+    '1485846234645-a62644f84728'  // Movie clapperboard
+  ],
+  'Digital Marketing & SEO': [
+    '1460925895917-afdab827c52f', // Marketing analytics
+    '1432888498266-38ffec3eaf0a', // Workspace/Marketing
+    '1644088379091-d574269d422f'  // Knowledge graph/Plexus
+  ],
+  'Music Production': [
+    '1509310202330-aec5af561c6b', // Music studio
+    '1598488035139-bdbb2231ce04'  // Audio mixer
+  ]
+};
+
 async function generatePost() {
   // Get used image IDs to avoid duplication
   const blogDir = path.join(process.cwd(), 'content/blog');
@@ -28,6 +61,24 @@ async function generatePost() {
   }
 
   const category = categories[Math.floor(Math.random() * categories.length)];
+  
+  // Select a unique image from the pool for this category
+  let imageId = '1485827404703-89b55fcc595e'; // Default fallback
+  const categoryKey = Object.keys(imagePool).find(k => category.startsWith(k.split(' ')[0]));
+  if (categoryKey) {
+    const availableImages = imagePool[categoryKey].filter(id => !usedIds.includes(id));
+    if (availableImages.length > 0) {
+      imageId = availableImages[Math.floor(Math.random() * availableImages.length)];
+    } else {
+      // Fallback to any unused image from the entire pool
+      const allImages = Object.values(imagePool).flat();
+      const backupImages = allImages.filter(id => !usedIds.includes(id));
+      if (backupImages.length > 0) {
+        imageId = backupImages[Math.floor(Math.random() * backupImages.length)];
+      }
+    }
+  }
+
   const date = new Date().toISOString().split('T')[0];
 
   console.log(`Identifying a trending topic for category: ${category}`);
@@ -88,7 +139,7 @@ async function generatePost() {
     tags: ["at", "least", "five", "highly", "relevant", "seo", "tags"]
     status: "published"
     readingTime: "Calculated based on 200 wpm"
-    image: "https://images.unsplash.com/photo-XXX?w=1200&h=630&fit=crop (Replace XXX with a real, high-quality, long-form NUMERICAL Unsplash ID related to: ${topic})"
+    image: "https://images.unsplash.com/photo-${imageId}?w=1200&h=630&fit=crop"
     ---
     
     Content & SEO Requirements:
@@ -110,7 +161,7 @@ async function generatePost() {
     - Tone: Visionary, professional, authoritative, and innovative. 
     - AVOID "AI-isms" (e.g., "In conclusion," "In today's fast-paced digital world," "Delve into"). Focus on unique insights and high-value technical depth.
     
-    IMAGE RESTRICTION: You MUST provide a fresh, real, high-quality, long-form NUMERICAL Unsplash ID (like 1485827404703-89b55fcc595e). Do NOT use any of these previously used IDs: ${usedIds.join(', ')}. Ensure the image is visually stunning and directly related to: ${topic}.
+    IMAGE RESTRICTION: Do NOT suggest an image ID. Use the one provided in the template.
     
     IMPORTANT: Return ONLY the markdown content, including the frontmatter. Do not include any preamble, conversational text, or wrapper markdown code blocks if possible.
   `;
