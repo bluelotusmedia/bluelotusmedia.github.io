@@ -17,12 +17,14 @@ const imagePool = {
     '1697577418970-95d99b5a55cf', // AI Chip 3D
     '1773332585861-72cf1558a6fc', // Copilot/Tech lifestyle
     '1485827404703-89b55fcc595e', // Robot/AI
-    '1674027444485-cec3da58eef4'  // Neural plexus
+    '1674027444485-cec3da58eef4', // Neural plexus
+    '1620712943543-bcc4688e7485'  // AI Brain
   ],
   'Web Development': [
     '1550751827-4bd374c3f58b', // Data security visualization
     '1518770660439-4636190af475', // Circuit board
-    '1555066931-4365d14bab8c'  // Code screen
+    '1555066931-4365d14bab8c', // Code screen
+    '1498050108023-c5249f4df085'  // Code typing
   ],
   'Graphic Design & Branding': [
     '1533750357371-d70bb4d3805f', // Marketing icons/Design
@@ -36,7 +38,8 @@ const imagePool = {
   'Digital Marketing & SEO': [
     '1460925895917-afdab827c52f', // Marketing analytics
     '1432888498266-38ffec3eaf0a', // Workspace/Marketing
-    '1644088379091-d574269d422f'  // Knowledge graph/Plexus
+    '1644088379091-d574269d422f', // Knowledge graph/Plexus
+    '1551288049-bebda4e38f71'  // Data charts
   ],
   'Music Production': [
     '1509310202330-aec5af561c6b', // Music studio
@@ -71,7 +74,8 @@ async function generatePost() {
   const category = categories[Math.floor(Math.random() * categories.length)];
   
   // Select a unique image from the pool for this category
-  let imageId = '1485827404703-89b55fcc595e'; // Default fallback
+  const allImagesFlat = Object.values(imagePool).flat();
+  let imageId = allImagesFlat[Math.floor(Math.random() * allImagesFlat.length)]; // Dynamic random fallback
   const categoryKey = Object.keys(imagePool).find(k => category.startsWith(k.split(' ')[0]));
   if (categoryKey) {
     const availableImages = imagePool[categoryKey].filter(id => !usedIds.includes(id));
@@ -79,8 +83,7 @@ async function generatePost() {
       imageId = availableImages[Math.floor(Math.random() * availableImages.length)];
     } else {
       // Fallback to any unused image from the entire pool
-      const allImages = Object.values(imagePool).flat();
-      const backupImages = allImages.filter(id => !usedIds.includes(id));
+      const backupImages = allImagesFlat.filter(id => !usedIds.includes(id));
       if (backupImages.length > 0) {
         imageId = backupImages[Math.floor(Math.random() * backupImages.length)];
       }
