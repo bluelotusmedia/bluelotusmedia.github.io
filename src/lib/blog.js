@@ -25,11 +25,10 @@ export function getSortedPostsData() {
     .filter(post => post.status === 'published' || process.env.NODE_ENV === 'development');
 
   return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
+    if (a.date < b.date) return 1;
+    if (a.date > b.date) return -1;
+    // For posts on the same day, sort by slug descending (alphabetical)
+    return a.slug < b.slug ? 1 : -1;
   });
 }
 

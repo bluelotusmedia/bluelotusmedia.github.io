@@ -107,7 +107,7 @@ async function generatePost() {
     - Tone: Visionary, professional, authoritative, and innovative. 
     - AVOID "AI-isms" (e.g., "In conclusion," "In today's fast-paced digital world," "Delve into"). Focus on unique insights and high-value technical depth.
     
-    IMAGE RESTRICTION: Do NOT use any of these Unsplash IDs (previously used): ${usedIds.join(', ')}. Provide a fresh, real, high-quality, long-form NUMERICAL Unsplash ID related to: ${topic}.
+    IMAGE RESTRICTION: You MUST provide a fresh, real, high-quality, long-form NUMERICAL Unsplash ID (like 1485827404703-89b55fcc595e). Do NOT use any of these previously used IDs: ${usedIds.join(', ')}. Ensure the image is visually stunning and directly related to: ${topic}.
     
     IMPORTANT: Return ONLY the markdown content, including the frontmatter. Do not include any preamble, conversational text, or wrapper markdown code blocks if possible.
   `;
