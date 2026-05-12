@@ -57,7 +57,7 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto bg-white/80 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl border border-gray-100">
+    <div className="max-w-2xl mx-auto bg-white/50 backdrop-blur-sm px-5 py-8 md:p-12 rounded-3xl shadow-xl border border-gray-100/50">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2 text-left">

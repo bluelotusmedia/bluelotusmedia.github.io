@@ -37,7 +37,7 @@ async function generatePost() {
   } catch (error) {
     console.error("Error generating topic.");
     if (error.stdout) console.error("STDOUT:", error.stdout.toString());
-    if (error.stderr) console.error("STDERR:", error.s!YFRDtderr.toString());
+    if (error.stderr) console.error("STDERR:", error.stderr.toString());
     process.exit(1);
   }
 

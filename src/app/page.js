@@ -726,7 +726,7 @@ export default function Home() {
 					ref={contactRef}
 					className="py-32 px-6 md:px-12 bg-[#F0F8FF] relative scroll-mt-24"
 				>
-					<div className="max-w-5xl mx-auto backdrop-blur-3xl bg-white p-12 md:p-20 rounded-[50px] shadow-2xl border border-white">
+					<div className="max-w-5xl mx-auto backdrop-blur-3xl bg-white px-5 py-12 md:p-20 rounded-[40px] md:rounded-[50px] shadow-2xl border border-white">
 						<div className="text-center mb-16">
 							<h2 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 italic">
 								Let&apos;s Create.

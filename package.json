@@ -7,7 +7,10 @@
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "blog:generate": "node scripts/manage-blog.js generate",
+    "blog:list": "node scripts/manage-blog.js list",
+    "blog:delete": "node scripts/manage-blog.js delete"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
