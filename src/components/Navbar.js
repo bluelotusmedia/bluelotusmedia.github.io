@@ -21,6 +21,7 @@ export default function Navbar({ isHome = false }) {
     };
 
     if (isHome) {
+      handleScroll();
       window.addEventListener('scroll', handleScroll);
       return () => window.removeEventListener('scroll', handleScroll);
     } else {
