@@ -19,8 +19,11 @@ async function generatePost() {
     const blogFiles = fs.readdirSync(blogDir).filter(f => f.endsWith('.md'));
     blogFiles.forEach(file => {
       const content = fs.readFileSync(path.join(blogDir, file), 'utf8');
-      const match = content.match(/photo-([a-zA-Z0-9-]+)/);
-      if (match) usedIds.push(match[1]);
+      // Improved regex to catch all Unsplash photo IDs in the file
+      const matches = content.matchAll(/photo-([a-zA-Z0-9-]+)/g);
+      for (const match of matches) {
+        usedIds.push(match[1]);
+      }
     });
   }
 
