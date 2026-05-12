@@ -53,6 +53,13 @@ if (action === 'list') {
   } catch (e) {
     // Error handled by ai-writer
   }
+} else {
+  console.log('\n--- Blue Lotus Blog Manager ---');
+  console.log('Usage:');
+  console.log('  npm run blog:list       - Show all posts');
+  console.log('  npm run blog:generate   - Run the AI writer manually');
+  console.log('  npm run blog:delete <#> - Delete post by number');
+  console.log('-------------------------------\n');
 }
 
 function updateAssets() {
@@ -70,11 +77,4 @@ function updateAssets() {
     console.log('\n⚠️  Warning: Distribution assets could not be updated automatically.');
     console.log('You may need to run "npm run build" to sync all changes.\n');
   }
-} else {
-  console.log('\n--- Blue Lotus Blog Manager ---');
-  console.log('Usage:');
-  console.log('  npm run blog:list       - Show all posts');
-  console.log('  npm run blog:generate   - Run the AI writer manually');
-  console.log('  npm run blog:delete <#> - Delete post by number');
-  console.log('-------------------------------\n');
 }

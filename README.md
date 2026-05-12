@@ -1,7 +1,7 @@
 # Blue Lotus Media
 ### Transforming Visions into Engaging Digital Experiences
 
-![Blue Lotus Media Logo](https://bluelotusmedia.com/images/logo.svg)
+![Blue Lotus Media Logo](public/logo.svg)
 
 Blue Lotus Media is the portfolio and freelance brand of **Jacob Louis**, a Chilhowie, Virginia-based multimedia producer specializing in web development, graphic design, music production, and video editing.
 
