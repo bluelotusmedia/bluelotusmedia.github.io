@@ -729,7 +729,7 @@ export default function Home() {
 					<div className="max-w-5xl mx-auto backdrop-blur-3xl bg-white p-12 md:p-20 rounded-[50px] shadow-2xl border border-white">
 						<div className="text-center mb-16">
 							<h2 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 italic">
-								Let's Create.
+								Let&apos;s Create.
 							</h2>
 							<p className="text-xl text-gray-500 font-light max-w-xl mx-auto">
 								Ready to build something sovereign? Get in touch to discuss your

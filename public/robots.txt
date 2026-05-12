@@ -1,4 +1,9 @@
+# *
 User-agent: *
 Allow: /
 
+# Host
+Host: https://bluelotusmedia.com
+
+# Sitemaps
 Sitemap: https://bluelotusmedia.com/sitemap.xml
