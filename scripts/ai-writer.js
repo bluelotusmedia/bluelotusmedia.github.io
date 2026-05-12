@@ -12,6 +12,18 @@ const categories = [
 ];
 
 async function generatePost() {
+  // Get used image IDs to avoid duplication
+  const blogDir = path.join(process.cwd(), 'content/blog');
+  const usedIds = [];
+  if (fs.existsSync(blogDir)) {
+    const blogFiles = fs.readdirSync(blogDir).filter(f => f.endsWith('.md'));
+    blogFiles.forEach(file => {
+      const content = fs.readFileSync(path.join(blogDir, file), 'utf8');
+      const match = content.match(/photo-([a-zA-Z0-9-]+)/);
+      if (match) usedIds.push(match[1]);
+    });
+  }
+
   const category = categories[Math.floor(Math.random() * categories.length)];
   const date = new Date().toISOString().split('T')[0];
 
@@ -94,6 +106,8 @@ async function generatePost() {
     - Target 1500-2000+ words.
     - Tone: Visionary, professional, authoritative, and innovative. 
     - AVOID "AI-isms" (e.g., "In conclusion," "In today's fast-paced digital world," "Delve into"). Focus on unique insights and high-value technical depth.
+    
+    IMAGE RESTRICTION: Do NOT use any of these Unsplash IDs (previously used): ${usedIds.join(', ')}. Provide a fresh, real, high-quality Unsplash ID related to: ${topic}.
     
     IMPORTANT: Return ONLY the markdown content, including the frontmatter. Do not include any preamble, conversational text, or wrapper markdown code blocks if possible.
   `;
