@@ -32,6 +32,7 @@ export default function Navbar({ isHome = false }) {
 
   const navLinks = [
     { name: 'About', href: isHome ? '#about' : '/#about' },
+    { name: 'Innovation', href: isHome ? '#innovation' : '/#innovation' },
     { name: 'Services', href: isHome ? '#services' : '/#services' },
     { name: 'Portfolio', href: isHome ? '#portfolio' : '/#portfolio' },
     { name: 'Blog', href: '/blog' },
@@ -66,20 +67,45 @@ export default function Navbar({ isHome = false }) {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={link.isButton ? 
-                  "bg-[#CC6600] text-white px-6 py-2 rounded-full font-bold hover:bg-[#A34F00] transition-all shadow-md hover:shadow-lg active:scale-95" :
-                  `font-medium transition-colors ${
-                    isScrolled ? 'text-gray-700 hover:text-[#CC6600]' : 'text-white hover:text-gray-300'
-                  }`
+            {navLinks.map((link) => {
+              const isHash = link.href.startsWith('#') || (link.href.startsWith('/#') && isHome);
+              const targetId = isHash ? (link.href.includes('#') ? link.href.split('#')[1] : null) : null;
+
+              const handleClick = (e) => {
+                if (isHash && targetId) {
+                  e.preventDefault();
+                  const element = document.getElementById(targetId);
+                  if (element) {
+                    const offset = 80; // Navbar height compensation
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: "smooth"
+                    });
+                    
+                    if (isMenuOpen) setIsMenuOpen(false);
+                  }
                 }
-              >
-                {link.name}
-              </Link>
-            ))}
+              };
+
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={handleClick}
+                  className={link.isButton ? 
+                    "bg-[#CC6600] text-white px-6 py-2 rounded-full font-bold hover:bg-[#A34F00] transition-all shadow-md hover:shadow-lg active:scale-95" :
+                    `font-medium transition-colors ${
+                      isScrolled ? 'text-gray-700 hover:text-[#CC6600]' : 'text-white hover:text-gray-300'
+                    }`
+                  }
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Mobile Toggle */}
@@ -132,18 +158,39 @@ export default function Navbar({ isHome = false }) {
             </div>
             
             <div className="flex flex-col gap-8 items-center justify-center flex-grow">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`text-3xl font-bold ${
-                    link.isButton ? 'text-[#CC6600]' : 'text-gray-900'
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isHash = link.href.startsWith('#') || (link.href.startsWith('/#') && isHome);
+                const targetId = isHash ? (link.href.includes('#') ? link.href.split('#')[1] : null) : null;
+
+                const handleClick = (e) => {
+                  if (isHash && targetId) {
+                    e.preventDefault();
+                    const element = document.getElementById(targetId);
+                    if (element) {
+                      const offset = 80;
+                      const elementPosition = element.getBoundingClientRect().top;
+                      const offsetPosition = elementPosition + window.pageYOffset - offset;
+                      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                      setIsMenuOpen(false);
+                    }
+                  } else {
+                    setIsMenuOpen(false);
+                  }
+                };
+
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={handleClick}
+                    className={`text-3xl font-bold ${
+                      link.isButton ? 'text-[#CC6600]' : 'text-gray-900'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>

@@ -38,9 +38,9 @@ export default function BlogPage() {
   const posts = getSortedPostsData();
 
   return (
-    <div className="min-h-screen bg-[#F0F8FF] text-gray-900 pb-20">
+    <div className="min-h-screen bg-[#F0F8FF] text-gray-900">
       <Navbar isHome={false} />
-      <main id="main-content" className="max-w-7xl mx-auto px-6 md:px-12 pt-32">
+      <main id="main-content" className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-32">
         <header className="mb-16 text-center">
           <h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-gray-900">
             Digital Insights

@@ -101,13 +101,13 @@ export default async function PostPage({ params }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#F0F8FF] text-gray-900 pb-20">
+    <div className="min-h-screen bg-[#F0F8FF] text-gray-900">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Navbar isHome={false} />
-      <main id="main-content" className="max-w-4xl mx-auto px-6 md:px-12 pt-32">
+      <main id="main-content" className="max-w-4xl mx-auto px-6 md:px-12 pt-32 pb-32">
         <article>
           <Link 
             href="/blog"
