@@ -1,18 +1,19 @@
 name: AI Blog Generator
-on: [workflow_dispatch]
-jobs:
-  generate:
-      runs-on: ubuntu-latest
-          permissions:
-                contents: write
-                      pull-requests: write
-                          steps:
-                                - uses: actions/checkout@v4
-                                      - run: npm install
-                                            - run: npm install -g @google/gemini-cli@latest
-                                                  - run: npm run blog:generate
-                                                          env:
-                                                                    GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-                                                                              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                                                                                        GEMINI_CLI_TRUST_WORKSPACE: true
-                                                                                        
+on:
+  workflow_dispatch:
+  jobs:
+    generate:
+        runs-on: ubuntu-latest
+            permissions:
+                  contents: write
+                        pull-requests: write
+                            steps:
+                                  - uses: actions/checkout@v4
+                                        - run: npm install
+                                              - run: npm install -g @google/gemini-cli@latest
+                                                    - run: npm run blog:generate
+                                                            env:
+                                                                      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+                                                                                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                                                                                          GEMINI_CLI_TRUST_WORKSPACE: true
+                                                                                          
