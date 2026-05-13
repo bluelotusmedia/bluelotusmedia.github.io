@@ -67,7 +67,7 @@ Traditional CRO was about A/B testing buttons. CRO 2.0, powered by propensity mo
 
 ## Technical Roadmap: Implementing Neural MTA at Scale
 
-Implementing neural propensity modeling is a significant undertaking that requires alignment between marketing, data engineering, and legal teams. Blue Lotus Media utilizes a four-phase framework to ensure a successful deployment.
+Implementing neural propensity modeling is a significant undertaking that requires alignment between marketing, data engineering, and legal teams. A successful deployment typically follows a four-phase framework:
 
 ### Phase 1: The Data "Refinery"
 Before training a model, you must solve the "Garbage In, Garbage Out" problem. This involves:

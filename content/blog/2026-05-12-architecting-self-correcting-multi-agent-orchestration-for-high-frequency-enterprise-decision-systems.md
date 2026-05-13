@@ -81,7 +81,7 @@ While the goal is autonomy, the initial stages should include a "Confidence Scor
 Use a "Hybrid Model Strategy." Use high-reasoning models (e.g., GPT-5 or Claude 4) for the Orchestrator role, and faster, cheaper models for the Worker roles. This maximizes **AI Innovation** while controlling costs.
 
 ### Case Study: High-Frequency Supply Chain Management
-A global logistics provider partnered with Blue Lotus Media to solve "Flash-Demand" spikes. We architected a multi-agent system where:
+Consider a global logistics provider aiming to solve "Flash-Demand" spikes. A multi-agent system could be architected where:
 1.  **Agent A (Trend Spotter)** monitored social media and weather patterns.
 2.  **Agent B (Inventory Manager)** checked real-time warehouse levels.
 3.  **Agent C (Negotiator)** autonomously contacted third-party carriers to secure extra capacity.

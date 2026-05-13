@@ -64,7 +64,7 @@ As we move through 2026, the adoption of UWB in the professional sector is accel
 
 ## Actionable Strategies: Implementing UWB in Your Workflow
 
-For studios looking to integrate **Ultra-Wideband (UWB) protocols for zero-latency wireless spatial audio monitoring**, the implementation must be surgical. Here is how **Blue Lotus Media** approaches a UWB deployment:
+For studios looking to integrate **Ultra-Wideband (UWB) protocols for zero-latency wireless spatial audio monitoring**, the implementation must be surgical. Here is a theoretical approach to a UWB deployment:
 
 ### Step 1: RF Environment Audit
 Before deploying UWB, conduct an audit of the existing 6GHz to 9GHz spectrum in your facility. While UWB is resilient, identifying high-power emitters in these bands is crucial for ensuring maximum range and stability.
@@ -75,8 +75,8 @@ Ensure your **DSP** chain is optimized for low-buffer performance. Using UWB for
 ### Step 3: Spatial Mapping
 Utilize UWB’s positioning data to automatically calibrate your binaural rendering. Some advanced UWB monitoring systems can "sense" their location relative to the transmitter, allowing the **Sound Design** software to automatically adjust the HRTF profile based on the engineer's physical position in the room.
 
-### Case Study: High-Frequency Mastering for Film
-**Blue Lotus Media** recently implemented a UWB-based monitoring system for a major film scoring stage. The challenge was allowing the lead engineer to move between the console and the client sofa without losing the accuracy of the 7.1.4 mix. By deploying a multi-node UWB mesh, we achieved a consistent 1.8ms latency with bit-perfect 96kHz audio, resulting in a 30% reduction in mix-revision time due to the engineer’s increased mobility and comfort.
+### Theoretical Application: High-Frequency Mastering for Film
+Consider a scenario involving a major film scoring stage. The challenge is allowing the lead engineer to move between the console and the client sofa without losing the accuracy of the 7.1.4 mix. By deploying a multi-node UWB mesh, it is possible to achieve a consistent 1.8ms latency with bit-perfect 96kHz audio, resulting in a significant reduction in mix-revision time due to the engineer’s increased mobility and comfort.
 
 ---
 

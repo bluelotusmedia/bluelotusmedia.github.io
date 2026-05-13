@@ -32,7 +32,7 @@ async function reviewPR() {
       1. Technical Depth: Does it provide genuine insight or is it surface-level? It must be sophisticated.
       2. Length: Is it at least 1500 words? (Reject if it's significantly shorter than the target).
       3. Formatting: Does it use a clear H1/H2/H3 hierarchy, bullet points, and tables where appropriate?
-      4. Value: Does it offer actionable advice or unique perspectives for technical readers?
+      4. Honesty & Integrity: Does the post invent fictional case studies, clients, or past projects for Blue Lotus Media? (Reject or request changes immediately if false claims are made).
       5. Accuracy: Does the information reflect current (2025/2026) tech trends and accurate concepts?
       
       Content to Review:

@@ -14,7 +14,7 @@ Google's Gemini models have redefined what is possible in software development. 
 
 ## The Architecture of Autonomy
 
-An autonomous system built on Gemini isn't just a series of API calls. it's a feedback loop. At **Blue Lotus Media**, we follow a four-pillar architecture for these systems:
+An autonomous system built on Gemini isn't just a series of API calls; it's a feedback loop. A robust four-pillar architecture for these systems includes:
 
 ### 1. The Perceiver (Observation)
 Using Gemini's multimodal inputs, the system "sees" and "reads" its environment. Whether it's monitoring real-time user behavior on a web app or analyzing log files for performance bottlenecks, the system is constantly gathering data.

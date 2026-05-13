@@ -162,9 +162,9 @@ async function generatePost() {
     2. Featured Snippet Target: Include a brief, objective 2-3 sentence paragraph early on that directly answers "What is [Topic]?" or "How does [Topic] work?" to win Google Featured Snippets.
     3. Deep Dive Analysis: Provide high-level technical insights. Break down complex concepts into understandable but sophisticated sections. Use H2 and H3 tags logically for semantic structure.
     4. Market Trends & Data (EEAT): Discuss current market trends, emerging technologies, and data-driven predictions for 2026 to build Experience, Expertise, Authoritativeness, and Trustworthiness.
-    5. Actionable Strategies & Case Studies: Give the reader actionable "how-to" advice. Include real-world or hypothetical examples of how Blue Lotus Media would implement these solutions to achieve ROI.
+    5. Actionable Strategies & Educational Examples: Give the reader actionable "how-to" advice and theoretical industry examples. DO NOT invent fictional case studies, clients, or past projects for Blue Lotus Media or Jacob Louis. Keep the tone purely educational, objective, and entertaining without making false claims.
     6. "People Also Ask" Section (FAQ): Include an FAQ section at the end targeting 3 common search queries related to the topic.
-    7. Conclusion & CTA: Summarize key takeaways and provide a strong call to action to contact Blue Lotus Media for expert implementation.
+    7. Conclusion & CTA: Summarize key takeaways and provide a strong call to action to contact Blue Lotus Media for expert guidance.
     
     Formatting Rules:
     - Use a clear hierarchy of H2 and H3 tags (do not use H1 in the body, the title is the H1).

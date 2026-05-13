@@ -74,7 +74,7 @@ One of the most significant trends in **Web Development** is the deployment of s
 
 ## Actionable Strategies for 100/100 Core Web Vitals
 
-Blue Lotus Media utilizes a proprietary "Performance-First AI" framework to ensure that our **Technical Solutions** translate directly into business value.
+A "Performance-First AI" framework ensures that **Technical Solutions** translate directly into business value.
 
 ### 1. Partial Prerendering (PPR)
 

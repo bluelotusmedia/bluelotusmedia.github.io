@@ -32,7 +32,7 @@ A designer's new toolkit includes:
 
 ## Breaking the "AI Look"
 
-A common criticism of early AI design was that it all looked the same—dreamy, surreal, and slightly "off." Today, we use **ControlNets** and custom-trained models to ensure that our AI-assisted designs look intentional, sharp, and unique. At **Blue Lotus Media**, we specialize in creating designs that use AI for speed but retain a premium, handcrafted feel.
+A common criticism of early AI design was that it all looked the same—dreamy, surreal, and slightly "off." Today, designers use **ControlNets** and custom-trained models to ensure that AI-assisted designs look intentional, sharp, and unique. The goal is to use AI for speed but retain a premium, handcrafted feel.
 
 ## Conclusion
 

@@ -35,7 +35,7 @@ We are seeing the rise of "Text-to-Edit" workflows. By providing a transcript or
 
 ## The "Uncanny Valley" and Beyond
 
-The goal isn't just to use AI; it's to use AI **invisibly**. The best AI video editing is the kind you don't notice. At **Blue Lotus Media**, we use these tools to enhance the emotional impact of the story, not just to show off the tech.
+The goal isn't just to use AI; it's to use AI **invisibly**. The best AI video editing is the kind you don't notice. These tools should be used to enhance the emotional impact of the story, not just to show off the tech.
 
 ## Conclusion
 
