@@ -2,7 +2,7 @@ name: AI Blog Generator
 on:
   schedule:
     - cron: '0 0,8,16 * * *' # Midnight, 8 AM, and 4 PM UTC
-  wokflow_dispatch:
+  wokflow_drispatch:
 
 jobs:
   generate:
