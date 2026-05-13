@@ -2,7 +2,7 @@ name: AI Blog Generator
 on:
   schedule:
     - cron: '0 0,8,16 * * *' # Midnight, 8 AM, and 4 PM UTC
-  workflow_dispatch:
+  wokflow_dispatch:
 
 jobs:
   generate:
@@ -30,7 +30,7 @@ jobs:
         run: npm run blog:generate
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-                    GEMINI_CLI_TRUST_WORKSPACE: true
+                  GEMINI_CLI_TRUST_WORKSPACE: true
 
       - name: Create Pull Request
         id: create-pr
