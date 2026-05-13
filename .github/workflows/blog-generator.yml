@@ -42,6 +42,50 @@ on:
                                                                                                                                                                                                                                       body: 'This PR was automatically generated.'
                                                                                                                                                                                                                                                 branch: ai-blog-post
                                                                                                                                                                                                                                                           base: main
+                                                                                                                                                                                                                                                          name: AI Blog Generator
+on:
+  schedule:
+      - cron: '0 0,8,16 * * *'
+        workflow_dispatch:
+        
+        jobs:
+          generate:
+              runs-on: ubuntu-latest
+                  permissions:
+                        contents: write
+                              pull-requests: write
+                                  steps:
+                                        - uses: actions/checkout@v4
+                                                with:
+                                                          fetch-depth: 0
+                                                          
+                                                                - name: Setup Node
+                                                                        uses: actions/setup-node@v4
+                                                                                with:
+                                                                                          node-version: '20'
+                                                                                          
+                                                                                                - name: Install dependencies
+                                                                                                        run: npm install
+                                                                                                        
+                                                                                                              - name: Install Gemini CLI
+                                                                                                                      run: npm install -g @google/gemini-cli@latest
+                                                                                                                      
+                                                                                                                            - name: Generate Post (Automated)
+                                                                                                                                    run: npm run blog:generate
+                                                                                                                                            env:
+                                                                                                                                                      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+                                                                                                                                                                GEMINI_CLI_TRUST_WORKSPACE: true
+                                                                                                                                                                
+                                                                                                                                                                      - name: Create Pull Request
+                                                                                                                                                                              id: create-pr
+                                                                                                                                                                                      uses: peter-evans/create-pull-request@v6
+                                                                                                                                                                                              with:
+                                                                                                                                                                                                        token: ${{ secrets.GITHUB_TOKEN }}
+                                                                                                                                                                                                                  commit-message: 'feat(blog): new AI-generated post'
+                                                                                                                                                                                                                            title: 'Automated Blog Post'
+                                                                                                                                                                                                                                      body: 'This PR was automatically generated.'
+                                                                                                                                                                                                                                                branch: ai-blog-post
+                                                                                                                                                                                                                                                          base: main
                                                                                                                                                                                                                                                           name:  workflow_dispatch:log Generator
 on:
   schedule:
