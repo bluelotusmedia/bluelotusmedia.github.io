@@ -30,6 +30,7 @@ jobs:
         run: npm run blog:generate
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+                    GEMINI_CLI_TRUST_WORKSPACE: true
 
       - name: Create Pull Request
         id: create-pr
@@ -50,5 +51,6 @@ jobs:
         run: node scripts/ai-reviewer.js
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+                    GEMINI_CLI_TRUST_WORKSPACE: true
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.create-pr.outputs.pull-request-number }}
