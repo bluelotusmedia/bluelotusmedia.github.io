@@ -29,6 +29,7 @@ jobs:
 
       - name: Generate Post (Automated)
         run: npm run blog:generate
+                  GEMINI_CLI_TRUST_WORKSPACE: true
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
