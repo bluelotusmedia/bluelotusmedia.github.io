@@ -200,15 +200,14 @@ export default function Home() {
 							transition={{ delay: 0.8 }}
 							className="inline-block mb-6 px-6 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/40 text-[#FF8C00] font-bold tracking-widest text-xs uppercase shadow-lg"
 						>
-							Engineering Sovereign Intelligence
+							28 Years of Digital Mastery
 						</motion.div>
 						<h1 className="text-6xl md:text-8xl font-black text-white mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
 							Sovereign Engineering.{" "}
 							<span className="text-[#CC6600]">Inspired Design.</span>
 						</h1>
 						<p className="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto leading-relaxed font-light drop-shadow-lg">
-							High-performance digital ecosystems powered by **Eight Limbs**
-							neural consensus and multi-disciplinary creative direction.
+							High-performance digital ecosystems and multi-disciplinary creative direction, bridging the gap between human artistry and sovereign engineering.
 						</p>
 						<div className="flex flex-col md:flex-row gap-6 justify-center">
 							<button
@@ -278,8 +277,7 @@ export default function Home() {
 								I bridge the gap between sophisticated aesthetics and
 								high-performance engineering. Based in **Chilhowie, Virginia**
 								(relocated from Denver in 2025), I bring over 28 years of
-								digital mastery—from the **Eight Limbs** financial intelligence
-								system to immersive **sound alchemy**. My work is driven by a commitment to **authenticity** and the pursuit of **uncensored truth** through technology.
+								digital mastery—from high-performance systems architecture to immersive **sound alchemy**. My work is driven by a commitment to **authenticity** and the pursuit of **uncensored truth** through technology.
 							</p>
 							<div className="grid grid-cols-2 gap-8 mb-12">
 								<div>
