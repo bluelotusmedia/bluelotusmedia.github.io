@@ -46,8 +46,11 @@ async function reviewPR() {
     `;
 
     try {
-      // Calling Gemini CLI
-      const result = execSync(`echo "${prompt.replace(/"/g, '\\"')}" | gemini --approval-mode yolo`).toString();
+      // Calling Gemini CLI safely via stdin input
+      const result = execSync('gemini --approval-mode yolo', {
+        input: prompt,
+        maxBuffer: 1024 * 1024 * 10
+      }).toString();
       console.log("AI Review Result:", result);
       
       if (result.includes('VERDICT: APPROVE')) {
