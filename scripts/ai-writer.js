@@ -50,9 +50,11 @@ const imagePool = {
     '1498050108023-c5249f4df085'  // Code typing
   ],
   'Graphic Design & Branding': [
-    '1533750357371-d70bb4d3805f', // Marketing icons/Design
     '1558655146-d09347e92766', // Design process
-    '1635070041000-23097c9e7320'  // VR/3D Design
+    '1626785774573-4b799315345d', // 3D abstract shapes
+    '1561070791-2526d30994b5', // Design desk
+    '1513542789411-b6a5d4f31634', // Creative workspace
+    '1581291518633-83b4ebd1d83e'  // Design dashboard
   ],
   'Video Editing & Cinematic Narrative': [
     '1574717024653-61fd2cf4d44d', // Video editing software
@@ -66,7 +68,10 @@ const imagePool = {
   ],
   'Music Production': [
     '1509310202330-aec5af561c6b', // Music studio
-    '1598488035139-bdbb2231ce04'  // Audio mixer
+    '1598488035139-bdbb2231ce04', // Audio mixer
+    '1511671782779-c97d3d27a1d4', // Studio headphones
+    '1470225620780-dba8ba36b745', // Live mixer
+    '1507838153414-b4b713384a76'  // Recording session
   ]
 };
 
