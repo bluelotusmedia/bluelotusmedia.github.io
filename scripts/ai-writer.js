@@ -2,6 +2,29 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
+function extractMarkdown(text) {
+  let content = text.trim();
+  const mdBlockRegex = /```markdown\s*([\s\S]*?)\s*```/i;
+  const genericBlockRegex = /```\s*([\s\S]*?)\s*```/;
+  
+  let match = content.match(mdBlockRegex);
+  if (match) {
+    return match[1].trim();
+  }
+  
+  match = content.match(genericBlockRegex);
+  if (match) {
+    return match[1].trim();
+  }
+  
+  if (content.startsWith('```markdown')) content = content.substring(11);
+  else if (content.startsWith('```')) content = content.substring(3);
+  if (content.endsWith('```')) content = content.substring(0, content.length - 3);
+  
+  return content.trim();
+}
+
+
 const categories = [
   'Web Development (Next.js, React, Performance, Modern Frameworks, Core Web Vitals)',
   'Artificial Intelligence (Agentic Workflows, LLMs, Automation, Gemini, Prompt Engineering)',
@@ -190,11 +213,7 @@ async function generatePost() {
       maxBuffer: 1024 * 1024 * 10 // Allow up to 10MB of output for long articles
     }).toString();
     
-    let draft = draftResult.trim();
-    if (draft.startsWith('\`\`\`markdown')) draft = draft.substring(13);
-    else if (draft.startsWith('\`\`\`')) draft = draft.substring(3);
-    if (draft.endsWith('\`\`\`')) draft = draft.substring(0, draft.length - 3);
-    draft = draft.trim();
+    let draft = extractMarkdown(draftResult);
 
     console.log("Submitting draft for Autonomous Quality Control (QA)...");
 
@@ -221,11 +240,7 @@ async function generatePost() {
       maxBuffer: 1024 * 1024 * 10
     }).toString().trim();
 
-    let finalContent = qaResult;
-    if (finalContent.startsWith('\`\`\`markdown')) finalContent = finalContent.substring(13);
-    else if (finalContent.startsWith('\`\`\`')) finalContent = finalContent.substring(3);
-    if (finalContent.endsWith('\`\`\`')) finalContent = finalContent.substring(0, finalContent.length - 3);
-    finalContent = finalContent.trim();
+    let finalContent = extractMarkdown(qaResult);
 
     if (finalContent === 'REJECT') {
       console.error("❌ QA Review Failed: The generated post was rejected by the autonomous editor for low quality.");
