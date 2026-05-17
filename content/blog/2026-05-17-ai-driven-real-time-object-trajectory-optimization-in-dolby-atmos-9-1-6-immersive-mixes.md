@@ -1,6 +1,3 @@
-The blog post draft is strong but requires technical refinement to align with Blue Lotus Media's authoritative style. Specifically, I have corrected the reading time format, removed the meta-reference to "EEAT" (which read as an AI prompt artifact), tightened the technical prose in the introduction, and standardized the FAQ and CTA sections to match the existing codebase's conventions.
-
-```markdown
 ---
 title: "AI-Driven Real-Time Object Trajectory in Dolby Atmos 9.1.6"
 description: "Master AI-Driven Real-Time Object Trajectory Optimization in Dolby Atmos 9.1.6 Immersive Mixes. Learn how neural DSP and predictive panning redefine sound design."
